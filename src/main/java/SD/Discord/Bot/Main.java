@@ -6,9 +6,19 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 
 /*
- * Test Account Login
- * discordbot2779@gmail.com
- * Cyclones1
+ * --------------------------------
+ * 			IMPORTANT INFO
+ * --------------------------------
+ * 
+ * Test Account Login:
+ * 		discordbot2779@gmail.com
+ * 		Cyclones1
+ * 
+ * JDA Wiki:
+ * 		https://github.com/DV8FromTheWorld/JDA/wiki
+ * 
+ * JDA Javadocs:
+ * 		https://ci.dv8tion.net/job/JDA/javadoc/
  */
 public class Main {
 	
