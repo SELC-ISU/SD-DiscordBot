@@ -25,8 +25,9 @@ public class Main {
 	public static void main(String[] args) {
 		
 		JDA jda = null;
+		String token = "NjcwMDg0ODQ4NTA1MDYxMzc2.XjmYSQ.sZJdA_8GO8wc-1Y70JB_nt4rug4";
 		try {
-			jda = new JDABuilder("NjcwMDg0ODQ4NTA1MDYxMzc2.XipQuA.ksC9Qv4cXN1N6p7bBEULmY3bcMc")
+			jda = new JDABuilder(token)
 					.addEventListeners()
 					.build().awaitReady();
 		} catch (LoginException e) {
