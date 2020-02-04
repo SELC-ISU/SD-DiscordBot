@@ -25,10 +25,10 @@ public class Main {
 	public static void main(String[] args) {
 		
 		JDA jda = null;
-		String token = "NjcwMDg0ODQ4NTA1MDYxMzc2.XjmYSQ.sZJdA_8GO8wc-1Y70JB_nt4rug4";
+		String token = "NjcwMDg0ODQ4NTA1MDYxMzc2.XjmY3g._LXfCZFfSnm7h2hLjoZ8AlqCtak";
 		try {
 			jda = new JDABuilder(token)
-					.addEventListeners()
+					.addEventListeners(new WordListener())
 					.build().awaitReady();
 		} catch (LoginException e) {
 			System.out.println("Could not login!");
