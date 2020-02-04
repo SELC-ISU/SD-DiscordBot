@@ -20,6 +20,31 @@ import net.dv8tion.jda.api.JDABuilder;
  * JDA Javadocs:
  * 		https://ci.dv8tion.net/job/JDA/javadoc/
  */
+
+/*
+ * 
+ * Music bot
+ * Backend UI
+ * Customizability
+ * Post pictures
+ * Minigames:
+ * 		- TOS
+ * 		- Dice Roller
+ * 		- Coin flipper
+ * 		- Wheel decider
+ * Currency (MAYBE)
+ * Miscellaneous small stuff
+ * 
+ */
+
+/*
+ *ROLES:
+ *	Ed - Music Bot
+ *  Felipe - Image grabber thingy
+ *  Nate - File system stuff
+ *  Dylan - Minigames
+ *  
+ */
 public class Main {
 	
 	public static void main(String[] args) {
