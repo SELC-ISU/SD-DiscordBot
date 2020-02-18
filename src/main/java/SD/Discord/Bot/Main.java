@@ -50,11 +50,12 @@ public class Main {
 	public static void main(String[] args) {
 		
 		JDA jda = null;
-		String token = "NjcwMDg0ODQ4NTA1MDYxMzc2.XjmY3g._LXfCZFfSnm7h2hLjoZ8AlqCtak";
+		String token = "NjcwMDg0ODQ4NTA1MDYxMzc2.XkLGXA.Mj-eq60i7mxNo64EeUN4x4SYSWM";
 		try {
 			jda = new JDABuilder(token)
-					.addEventListeners(new WordListener())
+					.addEventListeners(new RandomGames(), new TownOfSalem())
 					.build().awaitReady();
+			
 		} catch (LoginException e) {
 			System.out.println("Could not login!");
 		} catch (InterruptedException e) {
