@@ -20,7 +20,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.text.JTextComponent;
 
 import com.esotericsoftware.yamlbeans.YamlReader;
 import com.esotericsoftware.yamlbeans.YamlWriter;
@@ -264,8 +263,7 @@ public class Main {
 		JDA jda = null;
 		try {
 			jda = new JDABuilder(token)
-					.addEventListeners(new WordListener(),
-							new CustomCommandListener())
+					.addEventListeners(new CustomCommandListener())
 					.build().awaitReady();
 			return true;
 		} catch (LoginException ex) {
