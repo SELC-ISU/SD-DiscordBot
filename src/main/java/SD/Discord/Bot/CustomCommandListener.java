@@ -46,7 +46,6 @@ public class CustomCommandListener extends ListenerAdapter{
 			if (e.getMessage().getContentRaw().equalsIgnoreCase(prefix + command)) {
 				String toSendRaw = (String) map.get(command);
 				String[] toSendLines = toSendRaw.split("&n;");
-				System.out.println(toSendLines);
 				for (String toSend : toSendLines) {
 					e.getChannel().sendMessage(toSend).queue();
 				}

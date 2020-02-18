@@ -51,6 +51,10 @@ import net.dv8tion.jda.api.JDABuilder;
  *  
  *  	YamlBeans
  *  	compile "com.esotericsoftware.yamlbeans:yamlbeans:1.06"
+ *  
+ *  	GRADLE PLUGINS
+ *  	id 'java'
+ *		id 'com.github.johnrengelman.shadow' version '5.2.0'
  */
 
 /*
@@ -73,7 +77,7 @@ import net.dv8tion.jda.api.JDABuilder;
  *ROLES:
  *	Ed - Music Bot
  *  Felipe - Image grabber thingy
- *  Nate - File system stuff
+ *  Nate - File system stuff and UI
  *  Dylan - Minigames
  *  
  */
@@ -123,6 +127,7 @@ public class Main {
 			map.put("prefix", "!");
 			map.put("ping", "pong");
 			map.put("custom", "");
+			map.put("anotherexample", "Create new lines by typing \"&n;\"!");
 			writer.write(map);
 			configControl.setWriter(writer);
 		}
@@ -198,7 +203,6 @@ public class Main {
 			public void mouseClicked(MouseEvent e) { //This is what happens when the fields are submitted
 				try {
 					super.mouseClicked(e);
-					System.out.println("Clicked!");
 					YamlWriter yamlW = new YamlWriter(new FileWriter("config.yml"));
 					HashMap<String, Object> newMap = new HashMap<String, Object>();
 					List<String> commands = new ArrayList<String>();
@@ -259,6 +263,7 @@ public class Main {
 		 */
 	}
 	
+	@SuppressWarnings("unused")
 	public static boolean runBot(String token) {
 		JDA jda = null;
 		try {

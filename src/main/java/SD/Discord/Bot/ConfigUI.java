@@ -184,7 +184,7 @@ public class ConfigUI {
 	 * 		The new panel
 	 */
 	public static JPanel addSubmitAndCancel(JFrame frame, JPanel submitCancelPanel, List<JPanel> entries, HashMap<String, Object> commandList, MouseAdapter clickEvent) {
-		JButton submit = new JButton("Submit");
+		JButton submit = new JButton("Start");
 		submitCancelPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		submit.setAlignmentX(SwingConstants.RIGHT);
 		submit.setFont(new Font("SansSerif", Font.BOLD, 16));
@@ -216,7 +216,6 @@ public class ConfigUI {
 							}
 						}
 					}
-					System.out.println(key + ": " + entry);
 					commandList.put(key, entry);
 				}
 				
