@@ -1,5 +1,10 @@
 package SD.Discord.Bot;
 
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -10,6 +15,12 @@ import java.util.List;
 import java.util.Map;
 
 import javax.security.auth.login.LoginException;
+import javax.swing.BoxLayout;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.text.JTextComponent;
 
 import com.esotericsoftware.yamlbeans.YamlReader;
 import com.esotericsoftware.yamlbeans.YamlWriter;
@@ -69,26 +80,16 @@ import net.dv8tion.jda.api.JDABuilder;
  */
 public class Main {
 	
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws IOException {
-		
-		JDA jda = null;
-		String token = "NjcwMDg0ODQ4NTA1MDYxMzc2.XjmY3g._LXfCZFfSnm7h2hLjoZ8AlqCtak";
-		try {
-			jda = new JDABuilder(token)
-					.addEventListeners(new WordListener())
-					.build().awaitReady();
-		} catch (LoginException e) {
-			System.out.println("Could not login!");
-		} catch (InterruptedException e) {
-			System.out.println("Could not login!!");
-		}
-		
 		
 		/*
 		 * Start up the config!!
 		 */
 		File myObj = null;
 		boolean newConfig = false;
+		
+		// Try to create a new file if one doesn't exist yet
 		try {
 		      myObj = new File("config.yml");
 		      if (myObj.createNewFile()) {
@@ -101,7 +102,8 @@ public class Main {
 		      System.out.println("An error occurred.");
 		      e.printStackTrace();
 		  }
-	
+		
+		// Start up the writer without resetting the whole config
 		ConfigControl configControlInit = new ConfigControl(new YamlReader(new FileReader("config.yml")), null);
 		List<Object> r = configControlInit.getConfigObjects();
 		List<Object> configInit = new ArrayList<Object>();
@@ -111,25 +113,168 @@ public class Main {
 			configInit.add(r);
 		}
 		
+		// Start up a new config control instance
 		ConfigControl configControl = new ConfigControl(new YamlReader(new FileReader("config.yml")), yamlW);
 		
+		// If its a new config, fill it with default values
 		if (newConfig) {
 			YamlWriter writer = new YamlWriter(new FileWriter("config.yml"));
 			Map<String, String> map = new HashMap<String, String>();
+			map.put("token", null);
 			map.put("prefix", "!");
+			map.put("ping", "pong");
+			map.put("custom", "");
+			writer.write(map);
 			configControl.setWriter(writer);
 		}
-		//configControl.addValue(configInit, "fort", "nite");
 		
+		// Close the writer
 		configControl.getWriter().close();
 		
+		/*
+		 * UI
+		 */
+	
+		// Initialize some variables that will be useful
 		List<Object> configObj = configControl.getConfigObjects();
-		//System.out.println(configObj);
-		//System.out.println(configControl.getValue(configObj, "prefix"));
+		String prefixChars = "";
+		String botToken = "";
+		HashMap<String, Object> commandList = new HashMap<String, Object>();
+		List<JPanel> commandEntries = new ArrayList<JPanel>();
+
+		// Fill the UI fields with config values
+		for (Object o : configObj) {
+			if (o instanceof HashMap<?, ?>) {
+				HashMap<String, Object> map = (HashMap<String, Object>) o;
+				for (String key : map.keySet()) {
+					if (key.equalsIgnoreCase("commands02779")) continue;
+					if (key.equalsIgnoreCase("prefix")) {
+						prefixChars = (String) map.get(key);
+					}
+					else if (key.equalsIgnoreCase("token")) {
+						botToken = (String) map.get(key);
+					}
+					else {
+						commandList.put(key, map.get(key));
+					}
+				}
+			}
+		}
 		
+		// Open the window
+		JFrame frame = ConfigUI.openFirstWindow();
+		Container content = frame.getContentPane();
+		content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
+		
+		//Header
+		JPanel header = ConfigUI.addHeader(frame);
+		content.add(header, BorderLayout.NORTH);
+		
+		
+		//Token Entry
+		JPanel tokenPanel = ConfigUI.addTokenField(frame, botToken);
+		content.add(tokenPanel, BorderLayout.SOUTH);
+		
+		
+		//Prefix Entry
+		JPanel prefixPanel = ConfigUI.addPrefixField(frame, prefixChars);
+		content.add(prefixPanel, BorderLayout.SOUTH);
+		
+		//Custom Commands
+		for (String key : commandList.keySet()) {
+			JPanel newEntry = ConfigUI.customCommandEntry(key, commandList.get(key).toString());
+			content.add(newEntry);
+			commandEntries.add(newEntry);
+		}
+		
+		JPanel submitCancel = new JPanel();
+		
+		//Add Custom Command Addition Button
+		content.add(ConfigUI.addAddButton(frame, content, submitCancel, commandEntries));
+		
+		//Submit Button
+		MouseAdapter submitEvent = new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e) { //This is what happens when the fields are submitted
+				try {
+					super.mouseClicked(e);
+					System.out.println("Clicked!");
+					YamlWriter yamlW = new YamlWriter(new FileWriter("config.yml"));
+					HashMap<String, Object> newMap = new HashMap<String, Object>();
+					List<String> commands = new ArrayList<String>();
+					String newToken = ConfigUI.getTextFromField(tokenPanel);
+					newMap.put("token", newToken);
+					String newPrefix = ConfigUI.getTextFromField(prefixPanel);
+					newMap.put("prefix", newPrefix);
+					for (JPanel custom : commandEntries) {
+						String key = null;
+						String value = null;
+						Component[] comps = custom.getComponents();
+						for (Component c : comps) {
+							boolean cont = true;
+							if (c instanceof JTextField) {
+								String text = ((JTextField) c).getText();
+								if (text.equals("")) {
+									cont = false;
+									break;
+								}
+								key = ((JTextField) c).getText();
+								continue;
+							}
+							if (c instanceof JScrollPane && cont) {
+								value = ConfigUI.getTextFromArea((JScrollPane) c);
+								newMap.put(key, value);
+								commands.add(key);
+							}
+						}
+					}
+					newMap.put("commands02779", commands);
+					yamlW.write(newMap);
+					yamlW.close();
+					frame.dispose();
+					
+					Variables.setPrefix(newPrefix);
+					boolean ableToLogin = runBot(newToken);
+					
+					JFrame newFrame = ConfigUI.openRunningFrame(ableToLogin);
+					newFrame.pack();
+				}
+				catch (IOException ex) {
+					ex.printStackTrace();
+				}
+			}
+			
+		};
+		content.add(ConfigUI.addSubmitAndCancel(frame, submitCancel, commandEntries, commandList, submitEvent), BorderLayout.SOUTH);
+		
+		//Scrollbar
+		JScrollPane scroll = new JScrollPane(content, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		
+		frame.setContentPane(scroll);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		frame.pack();
 		/*
 		 * END of the config!!
 		 */
+	}
+	
+	public static boolean runBot(String token) {
+		JDA jda = null;
+		try {
+			jda = new JDABuilder(token)
+					.addEventListeners(new WordListener(),
+							new CustomCommandListener())
+					.build().awaitReady();
+			return true;
+		} catch (LoginException ex) {
+			System.out.println("Could not login!");
+			return false;
+		} catch (InterruptedException ex) {
+			System.out.println("Could not login!!");
+			return false;
+		}
 	}
 
 }

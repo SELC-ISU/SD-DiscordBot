@@ -1,0 +1,9 @@
+commands02779: 
+- ping
+- custom
+- fort
+prefix: '#'
+ping: pong
+custom: What you want the bot to say back goes here
+fort: n&n;i&n;t&n;e
+token: NjcwMDg0ODQ4NTA1MDYxMzc2.XkwPZg.aG3tT6BMkRCLfTazDigUovA4Hk8
