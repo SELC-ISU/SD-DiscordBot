@@ -8,6 +8,8 @@ import java.util.List;
 
 import com.esotericsoftware.yamlbeans.YamlReader;
 
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -47,6 +49,7 @@ public class CustomCommandListener extends ListenerAdapter{
 				String toSendRaw = (String) map.get(command);
 				String[] toSendLines = toSendRaw.split("&n;");
 				for (String toSend : toSendLines) {
+					toSend = Variables.replaceWithRoles(toSend, e.getGuild());
 					e.getChannel().sendMessage(toSend).queue();
 				}
 			}

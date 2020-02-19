@@ -128,6 +128,8 @@ public class Main {
 			map.put("ping", "pong");
 			map.put("custom", "");
 			map.put("anotherexample", "Create new lines by typing \"&n;\"!");
+			map.put("deletethis", "To delete a command just erase the command name.");
+			map.put("mention", "If you are going to mention, use the '_' to represent a space in the name.");
 			writer.write(map);
 			configControl.setWriter(writer);
 		}
