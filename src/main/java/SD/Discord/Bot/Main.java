@@ -25,7 +25,7 @@ public class Main {
 	public static void main(String[] args) {
 		
 		JDA jda = null;
-		String token = "NjcwMDg0ODQ4NTA1MDYxMzc2.XjmYSQ.sZJdA_8GO8wc-1Y70JB_nt4rug4";
+		String token = "NjcwMDg0ODQ4NTA1MDYxMzc2.Xjmasw.DOO1TrXHVWzqK5jYgy__5QgMh3s";
 		try {
 			jda = new JDABuilder(token)
 					.addEventListeners()
