@@ -55,6 +55,9 @@ import events.HelloEvent;
  *  	YamlBeans
  *  	compile "com.esotericsoftware.yamlbeans:yamlbeans:1.06"
  *  
+ *  	Music Bot
+ *  	implementation 'com.sedmelluq:lavaplayer:1.3.34'
+ *  
  *  	GRADLE PLUGINS
  *  	id 'java'
  *		id 'com.github.johnrengelman.shadow' version '5.2.0'
@@ -271,7 +274,7 @@ public class Main {
 	@SuppressWarnings("unused")
 	public static boolean runBot(String token) {
 		JDA jda = null;
-		
+
 		try {
 			jda = new JDABuilder(token)
 					.addEventListeners(new CustomCommandListener(), new RandomGames(), new TOSPreGame(), new TOSGame()).build().awaitReady();
