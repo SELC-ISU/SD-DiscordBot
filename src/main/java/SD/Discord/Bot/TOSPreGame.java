@@ -69,7 +69,6 @@ public class TOSPreGame extends ListenerAdapter{
 				{
 					e.getChannel().sendMessage("The game has now started! You will now recieve a DM of your role").queue();
 					//Call a seperate function that listens to commands (quit, accuse *playerName*, vote, abilities)
-					e.getPrivateChannel().sendFile(file, options);
 				}
 			}
 			else
