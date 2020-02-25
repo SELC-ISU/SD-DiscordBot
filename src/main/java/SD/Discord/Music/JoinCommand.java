@@ -1,4 +1,4 @@
-package musicBot;
+package SD.Discord.Music;
 
 import java.lang.reflect.Member;
 import java.util.List;
@@ -51,6 +51,6 @@ public class JoinCommand implements ICommand
     @Override
     public String getInvoke() 
     {
-        return "join";
+        return "connect";
     }
 }

@@ -1,4 +1,4 @@
-package musicBot;
+package SD.Discord.Music;
 
 import java.util.Random;
 import javax.security.auth.login.LoginException;
@@ -14,7 +14,7 @@ public class MusicBot
     private MusicBot()
     {
         CommandManager commandManager = new CommandManager(random);
-        Listener listener = new Listener(commandManager);
+        MusicListener music = new MusicListener(commandManager);
         Logger logger = LoggerFactory.getLogger(MusicBot.class);
 
         try 
@@ -23,7 +23,7 @@ public class MusicBot
         	
             logger.info("Booting");
             new JDABuilder(AccountType.BOT)
-                    .setToken(token).addEventListeners(listener)
+                    .setToken(token).addEventListeners(music)
                     .build().awaitReady();
             logger.info("Running");
         } 

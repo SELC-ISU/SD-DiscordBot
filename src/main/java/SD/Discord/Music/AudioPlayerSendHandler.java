@@ -1,4 +1,4 @@
-package musicBot;
+package SD.Discord.Music;
 
 import java.nio.Buffer;
 import java.nio.ByteBuffer;

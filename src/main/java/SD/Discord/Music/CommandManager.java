@@ -1,4 +1,4 @@
-package musicBot;
+package SD.Discord.Music;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -13,7 +13,7 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 public class CommandManager 
 {
     private final Map<String, ICommand> commands = new HashMap<>();
-    CommandManager(Random random) 
+    public CommandManager(Random random) 
     {
         addCommand(new JoinCommand());
         addCommand(new PlayCommand());

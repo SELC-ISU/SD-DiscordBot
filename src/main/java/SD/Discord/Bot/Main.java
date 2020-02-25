@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.security.auth.login.LoginException;
 import javax.swing.BoxLayout;
@@ -24,11 +25,10 @@ import javax.swing.JTextField;
 import com.esotericsoftware.yamlbeans.YamlReader;
 import com.esotericsoftware.yamlbeans.YamlWriter;
 
-
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
-import events.GuildMemberJoin;
-import events.HelloEvent;
+
+import SD.Discord.Music.*;
 
 /*
  * --------------------------------
@@ -277,7 +277,7 @@ public class Main {
 
 		try {
 			jda = new JDABuilder(token)
-					.addEventListeners(new CustomCommandListener(), new RandomGames(), new TOSPreGame(), new TOSGame()).build().awaitReady();
+					.addEventListeners(new CustomCommandListener(), new RandomGames(), new TOSPreGame(), new TOSGame(), new MusicListener(new CommandManager(new Random()))).build().awaitReady();
 			return true;
 		} catch (LoginException ex) {
 			System.out.println("Could not login!");
