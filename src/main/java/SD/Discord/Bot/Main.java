@@ -277,7 +277,7 @@ public class Main {
 
 		try {
 			jda = new JDABuilder(token)
-					.addEventListeners(new CustomCommandListener(), new RandomGames(), new TOSPreGame(), new TOSGame()).build().awaitReady();
+					.addEventListeners(new CustomCommandListener(), new RandomGames(), new TOSPreGame(), new TOSGame(), new HelloEvent(), new GuildMemberJoin()).build().awaitReady();
 			return true;
 		} catch (LoginException ex) {
 			System.out.println("Could not login!");
