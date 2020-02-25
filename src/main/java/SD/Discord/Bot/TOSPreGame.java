@@ -3,19 +3,24 @@ package SD.Discord.Bot;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class TOSPreGame extends ListenerAdapter{
 
 	//Create lists for players and messages sent
-	List<String> playerList = new ArrayList<String>();
+	List<User> playerList = new ArrayList<User>();
 	List<String> messageIds = new ArrayList<String>();
 	
 	public void onMessageReceived(MessageReceivedEvent e)
 	{
+		TOSGame g = new TOSGame();
 		//Initialize player
 		String player = "";
+		String playersInGame = "";
+		
+		//Boolean gameActive;
 		
 		//add all messages sent to message id list
 		messageIds.add(e.getMessageId());
@@ -34,7 +39,9 @@ public class TOSPreGame extends ListenerAdapter{
 		if ( e.getMessage().getContentRaw().contains(Variables.getPrefix() + "join") )
 		{
 			player = e.getAuthor().getName();
-			if ( playerList.contains(player) == true)
+			playersInGame += player  + ", " ;
+			
+			if ( playerList.contains(e.getAuthor()) == true)
 			{
 				e.getChannel().sendMessage(player + " has already joined the game").queue();
 			}
@@ -42,8 +49,8 @@ public class TOSPreGame extends ListenerAdapter{
 			{
 				e.getChannel().sendMessage(player + " has joined the game!").queue();
 			
-				playerList.add(e.getAuthor().getName());
-				e.getChannel().sendMessage("Players on the list: " + playerList.toString()).queue();
+				playerList.add(e.getAuthor());
+				e.getChannel().sendMessage("Players on the list: " + playersInGame).queue();
 			}
 		}
 		
@@ -54,22 +61,24 @@ public class TOSPreGame extends ListenerAdapter{
 		if (e.getMessage().getContentRaw().contains(Variables.getPrefix() + "start"))
 		{
 			player = e.getAuthor().getName();
-			if (playerList.contains(player) == true)
+			if (playerList.contains(e.getAuthor()) == true)
 			{
-				if (playerList.size() < 2)
+				/*if (playerList.size() < 2)
 				{
-					e.getChannel().sendMessage("The minimum amount of players is 2").queue();
+					e.getChannel().sendMessage("The minimum amount of players is 1").queue();
 				}
-				else if (playerList.size() > 15)
+				else */if (playerList.size() > 15)
 				{
 					e.getChannel().sendMessage("The maximum amount of players is 15").queue();
 				}
 			
 				else
 				{
+					//gameActive = true;
 					e.getChannel().sendMessage("The game has now started! You will now recieve a DM of your role").queue();
 					//Call a seperate function that listens to commands (quit, accuse *playerName*, vote, abilities)
-					e.getPrivateChannel().sendFile(file, options)
+					g.charSelect(playerList);
+					
 				}
 			}
 			else
@@ -86,7 +95,9 @@ public class TOSPreGame extends ListenerAdapter{
 		{
 			player = e.getAuthor().getName();
 			
-			if ( playerList.contains(player) == false)
+			//add playersInGame needs to remove the player
+			
+			if ( playerList.contains(e.getAuthor()) == false)
 			{
 				e.getChannel().sendMessage(player + " is not in the game").queue();
 			}
@@ -94,8 +105,8 @@ public class TOSPreGame extends ListenerAdapter{
 			{
 				e.getChannel().sendMessage(player + " was removed from the game").queue();
 			
-				playerList.remove(e.getAuthor().getName());
-				e.getChannel().sendMessage("Players on the list: " + playerList.toString()).queue();
+				playerList.remove(e.getAuthor());
+				e.getChannel().sendMessage("Players on the list: " + playersInGame).queue();
 
 			}
 		}
@@ -108,6 +119,11 @@ public class TOSPreGame extends ListenerAdapter{
 			{
 				e.getChannel().deleteMessageById(messageLog).queue();
 			}
+		}
+		
+		if ( e.getMessage().getContentRaw().contains(Variables.getPrefix() + "accused"))
+		{
+			player = e.getAuthor().getName();
 		}
 		
 		

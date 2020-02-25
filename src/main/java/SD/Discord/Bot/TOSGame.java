@@ -1,8 +1,9 @@
 package SD.Discord.Bot;
 
 import java.util.List;
-import java.util.Random;
 
+import net.dv8tion.jda.api.entities.PrivateChannel;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class TOSGame extends ListenerAdapter
@@ -11,38 +12,45 @@ public class TOSGame extends ListenerAdapter
 	private int numTown;
 	private int numNeut;
 	private int numMafia;
+	private int numPeople;
 	
 	public TOSGame()
 	{
 		//if ( )
 	}
 	
-	public void charSelect(List<String> lobby) 
+	public void charSelect(List<User> lobby) 
 	{
-		if (lobby.size() <= 10)
-		{
-			numTown = 3;
-			numMafia = 2;
-			numNeut = 2;
-			
-			while ( (numTown + numMafia + numNeut) < lobby.size())
-			{
-				if ( numTown < 5)
-				{
-					numTown++;
-				}
-				else
-				{
-					numNeut++;
-				}
-			}
-		}
-		else if (lobby.size() < 13 && lobby.size() > 10)
-		{
-			numTown = 5;
-		}
+		numPeople = lobby.size();
+		
+		 numNeut = lobby.size() / 3;
+		 numMafia = lobby.size() / 4;
+		 numTown = numPeople - (numNeut + numMafia);
+		 
 			
 		//dm players their roles(abilities,winning goal, attributes)
+		
+		for ( int i = 0; i < lobby.size() ; i++)
+		{
+			PrivateChannel pc = lobby.get(i).openPrivateChannel().complete();
+			
+			if ( numNeut > 0)
+			{
+				pc.sendMessage("You are a neutral player !!").queue();
+			}
+			else if ( numMafia > 0)
+			{
+				pc.sendMessage("You are a member of the mafia !!").queue();
+			}
+			else
+			{
+				pc.sendMessage("You are a friendly citizen of the town !!").queue();
+			}
+			
+			pc.close();
+		}
+		
+		
 		
 	}
 	
