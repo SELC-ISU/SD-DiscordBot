@@ -6,7 +6,7 @@ import java.util.List;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
-public class TownOfSalem extends ListenerAdapter{
+public class TOSPreGame extends ListenerAdapter{
 
 	//Create lists for players and messages sent
 	List<String> playerList = new ArrayList<String>();
@@ -31,7 +31,7 @@ public class TownOfSalem extends ListenerAdapter{
 		 * makes the user that entered !join the new player
 		 * prints out message confirming
 		 */
-		if ( e.getMessage().getContentRaw().contains("!join") )
+		if ( e.getMessage().getContentRaw().contains(Variables.getPrefix() + "join") )
 		{
 			player = e.getAuthor().getName();
 			if ( playerList.contains(player) == true)
@@ -51,20 +51,30 @@ public class TownOfSalem extends ListenerAdapter{
 		 * !start begins the game
 		 * must have between 7 and 15 players
 		 */
-		if (e.getMessage().getContentRaw().contains("!start"))
+		if (e.getMessage().getContentRaw().contains(Variables.getPrefix() + "start"))
 		{
-			if (playerList.size() < 2)
+			player = e.getAuthor().getName();
+			if (playerList.contains(player) == true)
 			{
-				e.getChannel().sendMessage("The minimum amount of players is 2").queue();
-			}
-			else if (playerList.size() > 15)
-			{
-				e.getChannel().sendMessage("The maximum amount of players is 15").queue();
+				if (playerList.size() < 2)
+				{
+					e.getChannel().sendMessage("The minimum amount of players is 2").queue();
+				}
+				else if (playerList.size() > 15)
+				{
+					e.getChannel().sendMessage("The maximum amount of players is 15").queue();
+				}
+			
+				else
+				{
+					e.getChannel().sendMessage("The game has now started! You will now recieve a DM of your role").queue();
+					//Call a seperate function that listens to commands (quit, accuse *playerName*, vote, abilities)
+					e.getPrivateChannel().sendFile(file, options)
+				}
 			}
 			else
 			{
-				e.getChannel().sendMessage("The game has now started! You will now recieve a DM of your role").queue();
-				
+				e.getChannel().sendMessage("You cannot start the game if you are not playing").queue();
 			}
 		}
 		
@@ -72,7 +82,7 @@ public class TownOfSalem extends ListenerAdapter{
 		 * !leave takes you out of the player list
 		 * does not take you out if you were not apart of the list
 		 */
-		if (e.getMessage().getContentRaw().contains("!leave"))
+		if (e.getMessage().getContentRaw().contains(Variables.getPrefix() + "leave"))
 		{
 			player = e.getAuthor().getName();
 			
@@ -92,7 +102,7 @@ public class TownOfSalem extends ListenerAdapter{
 		/**
 		 * !clear erases all messages sent while the bot is active
 		 */
-		if (e.getMessage().getContentRaw().contains("!clear"))
+		if (e.getMessage().getContentRaw().contains(Variables.getPrefix() + "clear"))
 		{
 			for ( String messageLog : messageIds )
 			{
@@ -102,6 +112,7 @@ public class TownOfSalem extends ListenerAdapter{
 		
 		
 	}
+	
 	
 	
 }

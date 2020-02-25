@@ -268,7 +268,7 @@ public class Main {
 		JDA jda = null;
 		try {
 			jda = new JDABuilder(token)
-					.addEventListeners(new CustomCommandListener())
+					.addEventListeners(new CustomCommandListener(), new RandomGames(), new TOSPreGame(), new TOSGame())
 					.build().awaitReady();
 			return true;
 		} catch (LoginException ex) {
