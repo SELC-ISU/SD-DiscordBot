@@ -1,4 +1,4 @@
-package musicBot;
+package SD.Discord.Music;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,11 +13,11 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
-class Listener extends ListenerAdapter 
+public class MusicListener extends ListenerAdapter 
 {
     private final CommandManager manager;
-    private final Logger logger = LoggerFactory.getLogger(Listener.class);
-    Listener(CommandManager manager) 
+    private final Logger logger = LoggerFactory.getLogger(MusicListener.class);
+   public MusicListener(CommandManager manager) 
     {
         this.manager = manager;
     }

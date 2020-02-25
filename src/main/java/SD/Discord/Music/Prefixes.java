@@ -1,4 +1,4 @@
-package musicBot;
+package SD.Discord.Music;
 
 import java.util.HashMap;
 import java.util.Map;

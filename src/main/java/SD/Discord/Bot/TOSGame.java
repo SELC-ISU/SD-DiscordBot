@@ -1,7 +1,6 @@
 package SD.Discord.Bot;
 
 import java.util.List;
-import java.util.Random;
 
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
