@@ -3,6 +3,7 @@ package SD.Discord.Bot;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -14,13 +15,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import javax.security.auth.login.LoginException;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 import com.esotericsoftware.yamlbeans.YamlReader;
 import com.esotericsoftware.yamlbeans.YamlWriter;
@@ -245,13 +250,36 @@ public class Main {
 					newMap.put("commands02779", commands);
 					yamlW.write(newMap);
 					yamlW.close();
+					Variables.setPrefix(newPrefix);
+					
 					frame.dispose();
 					
-					Variables.setPrefix(newPrefix);
-					boolean ableToLogin = runBot(newToken);
+					JFrame startingFrame = ConfigUI.openStartingFrame();
+					startingFrame.pack();
+
+					new Thread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            try {
+                                Thread.sleep(2100);
+                            } catch (InterruptedException ex) {
+                            }
+                            SwingUtilities.invokeLater(new Runnable() {
+
+                                @Override
+                                public void run() {
+                                	boolean ableToLogin = runBot(newToken);
+        							
+        							startingFrame.dispose();
+        							
+        							JFrame newFrame = ConfigUI.openRunningFrame(ableToLogin);
+        							newFrame.pack();
+                                }
+                            });
+                        }
+                    }).start();
 					
-					JFrame newFrame = ConfigUI.openRunningFrame(ableToLogin);
-					newFrame.pack();
 				}
 				catch (IOException ex) {
 					ex.printStackTrace();
@@ -274,7 +302,7 @@ public class Main {
 	}
 	
 	@SuppressWarnings("unused")
-	public static boolean runBot(String token) {
+	public static synchronized boolean runBot(String token) {
 		JDA jda = null;
 
 		try {

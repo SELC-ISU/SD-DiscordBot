@@ -17,6 +17,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -374,6 +376,50 @@ public class ConfigUI {
 		frame.pack();
 		frame.setVisible(true);
 
+		return frame;
+	}
+	
+	public static JFrame openStartingFrame() {
+		int width = 400;
+		int height = 175;
+		JFrame frame = new JFrame();
+		frame.setName("StartingWindow");
+		frame.setTitle("SwagDragon Discord Bot");
+		frame.setPreferredSize(new Dimension(width, height));
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		frame.setLocation((int)dim.getWidth() / 2 - (width/2), (int)dim.getHeight() / 2 - (height/2));
+		
+		JPanel header = new JPanel();
+		header.setBackground(Color.LIGHT_GRAY);
+		JLabel label = new JLabel("<html><div style='text-align: center;'>Revving up...</div></html>");
+		label.setAlignmentX(JLabel.CENTER);
+		label.setAlignmentY(JLabel.TOP);
+		label.setSize(frame.getPreferredSize().width, 100);
+		label.setFont(new Font("Sans-Serif", Font.BOLD, 18));
+		label.setBounds(0, 0, frame.getPreferredSize().width, 20);
+		label.setBackground(Color.BLACK);
+		header.add(label);
+		header.setBounds(0, 0, frame.getPreferredSize().width, 30);
+		header.setMaximumSize(new Dimension(Integer.MAX_VALUE, header.getMinimumSize().height));
+		frame.add(header);
+		
+		Icon img = new ImageIcon("images/loading.gif");
+		JLabel gif = new JLabel(img);
+		int gifwidth = 50;
+		int x_coord = (int) (frame.getPreferredSize().getWidth() / 2) - (gifwidth / 2);
+		int y_coord = (int) (frame.getPreferredSize().getHeight() / 2) - (gifwidth / 2);
+		gif.setBounds(x_coord, y_coord, gifwidth, gifwidth);
+		gif.setSize(gifwidth, gifwidth);
+		gif.setMaximumSize(new Dimension(gifwidth, gifwidth));
+		gif.setMinimumSize(new Dimension(gifwidth, gifwidth));
+		gif.setPreferredSize(new Dimension(gifwidth, gifwidth));
+		frame.add(gif);
+		
+		frame.setResizable(false);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.pack();
+		frame.setVisible(true);
+		
 		return frame;
 	}
 
