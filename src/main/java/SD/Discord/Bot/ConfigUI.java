@@ -7,6 +7,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -282,7 +283,7 @@ public class ConfigUI {
 	 */
 	public static JPanel addHeader(JFrame frame) {
 		JPanel header = new JPanel();
-		header.setBackground(Color.LIGHT_GRAY);
+		header.setBackground(new Color(0, 0, 255, 40));
 		JLabel label = new JLabel("<html><div style='text-align: center;'>Welcome to the SwagDragon Discord Bot!"
 				+ "<br />Please make changes to your configuration down below!</div></html>");
 		label.setAlignmentX(JLabel.CENTER);
@@ -346,7 +347,7 @@ public class ConfigUI {
 	public static JFrame openRunningFrame(boolean ableToLogin) {
 
 		//Outline of the frame
-		int width = 400;
+		int width = 300;
 		int height = 150;
 		JFrame frame = new JFrame();
 		frame.setName("RunningWindow");
@@ -356,17 +357,15 @@ public class ConfigUI {
 		frame.setLocation((int)dim.getWidth() / 2 - (width/2), (int)dim.getHeight() / 2 - (height/2));
 		
 		JPanel header = new JPanel();
-		header.setBackground(Color.LIGHT_GRAY);
+		header.setLayout(new GridBagLayout());
+		header.setBackground(new Color(0, 255, 0, 40));
 		JLabel label = new JLabel("<html><div style='text-align: center;'>The bot is running!</div></html>");
 		if (!ableToLogin) {
+			header.setBackground(new Color(255, 0, 0, 40));
 			label.setText("<html><div style='text-align: center;'>The bot is <u>not</u> running!</div></html>");
 		}
-		label.setAlignmentX(JLabel.CENTER);
-		label.setAlignmentY(JLabel.TOP);
 		label.setSize(frame.getPreferredSize().width, 100);
 		label.setFont(new Font("Sans-Serif", Font.BOLD, 18));
-		label.setBounds(50, 10, frame.getPreferredSize().width, 20);
-		label.setBackground(Color.BLACK);
 		header.add(label);
 		header.setBounds(50, 10, frame.getPreferredSize().width, 20);
 		header.setMaximumSize(new Dimension(Integer.MAX_VALUE, header.getMinimumSize().height));
