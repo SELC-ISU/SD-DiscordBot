@@ -14,6 +14,7 @@ public class TOSPreGame extends ListenerAdapter{
 	
 	public void onMessageReceived(MessageReceivedEvent e)
 	{
+		
 		//Initialize player
 		String player = "";
 		
@@ -23,6 +24,10 @@ public class TOSPreGame extends ListenerAdapter{
 		//if bot sends a message, ignore
 		if ( e.getAuthor().isBot()) return;
 		
+		if (!Variables.getMinigameChannel().equals("*")) {
+			if (!e.getChannel().getName().equals(Variables.getMinigameChannel())) return;
+		}
+		
 		//process all messages 
 		System.out.println(e.getMessage().getContentRaw());
 		
@@ -31,7 +36,7 @@ public class TOSPreGame extends ListenerAdapter{
 		 * makes the user that entered !join the new player
 		 * prints out message confirming
 		 */
-		if ( e.getMessage().getContentRaw().contains(Variables.getPrefix() + "join") )
+		if ( e.getMessage().getContentRaw().equalsIgnoreCase(Variables.getPrefix() + "join") )
 		{
 			player = e.getAuthor().getName();
 			if ( playerList.contains(player) == true)
@@ -51,7 +56,7 @@ public class TOSPreGame extends ListenerAdapter{
 		 * !start begins the game
 		 * must have between 7 and 15 players
 		 */
-		if (e.getMessage().getContentRaw().contains(Variables.getPrefix() + "start"))
+		if (e.getMessage().getContentRaw().equalsIgnoreCase(Variables.getPrefix() + "start"))
 		{
 			player = e.getAuthor().getName();
 			if (playerList.contains(player) == true)
@@ -68,8 +73,6 @@ public class TOSPreGame extends ListenerAdapter{
 				else
 				{
 					e.getChannel().sendMessage("The game has now started! You will now recieve a DM of your role").queue();
-					//Call a seperate function that listens to commands (quit, accuse *playerName*, vote, abilities)
-					//e.getPrivateChannel().sendFile(file, options);
 				}
 			}
 			else
@@ -82,7 +85,7 @@ public class TOSPreGame extends ListenerAdapter{
 		 * !leave takes you out of the player list
 		 * does not take you out if you were not apart of the list
 		 */
-		if (e.getMessage().getContentRaw().contains(Variables.getPrefix() + "leave"))
+		if (e.getMessage().getContentRaw().equalsIgnoreCase(Variables.getPrefix() + "leave"))
 		{
 			player = e.getAuthor().getName();
 			
@@ -102,11 +105,11 @@ public class TOSPreGame extends ListenerAdapter{
 		/**
 		 * !clear erases all messages sent while the bot is active
 		 */
-		if (e.getMessage().getContentRaw().contains(Variables.getPrefix() + "clear"))
+		if (e.getMessage().getContentRaw().equalsIgnoreCase(Variables.getPrefix() + "clear"))
 		{
 			for ( String messageLog : messageIds )
 			{
-				e.getChannel().deleteMessageById(messageLog).queue();
+				e.getChannel().deleteMessageById(messageLog).submit();
 			}
 		}
 		

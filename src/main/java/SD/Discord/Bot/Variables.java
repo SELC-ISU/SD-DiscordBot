@@ -10,9 +10,29 @@ import net.dv8tion.jda.api.entities.Role;
 public class Variables {
 	
 	private static String prefix;
+	private static String musicChannel;
+	private static String mgChannel;
 	
 	public Variables() {
 		prefix = "!";
+		musicChannel = "N/A";
+		mgChannel = "N/A";
+	}
+	
+	public static String getMusicChannel() {
+		return musicChannel;
+	}
+	
+	public static void setMusicChannel(String channel) {
+		musicChannel = channel;
+	}
+	
+	public static String getMinigameChannel() {
+		return mgChannel;
+	}
+	
+	public static void setMinigameChannel(String channel) {
+		mgChannel = channel;
 	}
 	
 	public static String getPrefix() {
