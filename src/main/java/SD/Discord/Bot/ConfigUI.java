@@ -275,6 +275,50 @@ public class ConfigUI {
 	}
 	
 	/**
+	 * Returns a panel for the music bot channel
+	 * @param frame
+	 * 		The frame to add it to
+	 * @return
+	 * 		The panel
+	 */
+	public static JPanel addMusicField(JFrame frame, String field) {
+		JPanel tokenPanel = new JPanel();
+		JLabel tokenLabel = new JLabel("Music Bot Channel:");
+		tokenLabel.setAlignmentX(JLabel.LEFT_ALIGNMENT);
+		tokenLabel.setAlignmentY(JLabel.CENTER_ALIGNMENT);
+		tokenLabel.setFont(new Font("Sans-Serif", Font.PLAIN, 14));
+		JTextField tokenEntry = new JTextField("", 20);
+		tokenEntry.setText(field);
+		tokenPanel.add(tokenLabel);
+		tokenPanel.add(tokenEntry);
+		tokenPanel.setBounds(10, 10, frame.getPreferredSize().width, 20);
+		tokenPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, tokenPanel.getMinimumSize().height));
+		return tokenPanel;
+	}
+	
+	/**
+	 * Returns a panel for the TOS channel
+	 * @param frame
+	 * 		The frame to add it to
+	 * @return
+	 * 		The panel
+	 */
+	public static JPanel addTOSField(JFrame frame, String field) {
+		JPanel tokenPanel = new JPanel();
+		JLabel tokenLabel = new JLabel("Minigames Channel:");
+		tokenLabel.setAlignmentX(JLabel.LEFT_ALIGNMENT);
+		tokenLabel.setAlignmentY(JLabel.CENTER_ALIGNMENT);
+		tokenLabel.setFont(new Font("Sans-Serif", Font.PLAIN, 14));
+		JTextField tokenEntry = new JTextField("", 20);
+		tokenEntry.setText(field);
+		tokenPanel.add(tokenLabel);
+		tokenPanel.add(tokenEntry);
+		tokenPanel.setBounds(10, 10, frame.getPreferredSize().width, 20);
+		tokenPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, tokenPanel.getMinimumSize().height));
+		return tokenPanel;
+	}
+	
+	/**
 	 * Returns the panel of the header text
 	 * @param frame
 	 * 		The frame to add it to

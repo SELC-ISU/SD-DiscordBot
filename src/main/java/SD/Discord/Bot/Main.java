@@ -139,6 +139,9 @@ public class Main {
 			map.put("anotherexample", "Create new lines by typing \"&n;\"!");
 			map.put("deletethis", "To delete a command just erase the command name.");
 			map.put("mention", "If you are going to mention, use the '_' to represent a space in the name.");
+			map.put("dm", "##DM## Start a command response like so for it to be DM'ed to the author.");
+			map.put("music-channel", "*");
+			map.put("mg-channel", "*");
 			writer.write(map);
 			configControl.setWriter(writer);
 		}
@@ -154,6 +157,8 @@ public class Main {
 		List<Object> configObj = configControl.getConfigObjects();
 		String prefixChars = "";
 		String botToken = "";
+		String music = "";
+		String tos = "";
 		HashMap<String, Object> commandList = new HashMap<String, Object>();
 		List<JPanel> commandEntries = new ArrayList<JPanel>();
 
@@ -168,6 +173,12 @@ public class Main {
 					}
 					else if (key.equalsIgnoreCase("token")) {
 						botToken = (String) map.get(key);
+					}
+					else if (key.equalsIgnoreCase("music-channel")) {
+						music = (String) map.get(key);
+					}
+					else if (key.equalsIgnoreCase("mg-channel")) {
+						tos = (String) map.get(key);
 					}
 					else {
 						commandList.put(key, map.get(key));
@@ -195,6 +206,14 @@ public class Main {
 		JPanel prefixPanel = ConfigUI.addPrefixField(frame, prefixChars);
 		content.add(prefixPanel, BorderLayout.SOUTH);
 		
+		//Music Entry
+		JPanel musicPanel = ConfigUI.addMusicField(frame, music);
+		content.add(musicPanel, BorderLayout.SOUTH);
+				
+		//Minigame Entry
+		JPanel tosPanel = ConfigUI.addTOSField(frame, tos);
+		content.add(tosPanel, BorderLayout.SOUTH);
+		
 		//Custom Commands
 		for (String key : commandList.keySet()) {
 			JPanel newEntry = ConfigUI.customCommandEntry(key, commandList.get(key).toString());
@@ -221,6 +240,10 @@ public class Main {
 					newMap.put("token", newToken);
 					String newPrefix = ConfigUI.getTextFromField(prefixPanel);
 					newMap.put("prefix", newPrefix);
+					String newMusic = ConfigUI.getTextFromField(musicPanel);
+					newMap.put("music-channel", newMusic);
+					String newTOS = ConfigUI.getTextFromField(tosPanel);
+					newMap.put("mg-channel", newTOS);
 					for (JPanel custom : commandEntries) {
 						String key = null;
 						String value = null;
@@ -247,6 +270,8 @@ public class Main {
 					yamlW.write(newMap);
 					yamlW.close();
 					Variables.setPrefix(newPrefix);
+					Variables.setMusicChannel(newMusic);
+					Variables.setMinigameChannel(newTOS);
 					
 					frame.dispose();
 					
