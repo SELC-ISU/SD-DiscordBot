@@ -15,7 +15,6 @@ public class CommandManager
     private final Map<String, ICommand> commands = new HashMap<>();
     public CommandManager(Random random) 
     {
-        addCommand(new JoinCommand());
         addCommand(new PlayCommand());
     }
 
