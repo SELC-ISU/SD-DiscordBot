@@ -36,6 +36,7 @@ public class TOSPreGame extends ListenerAdapter{
 		 * makes the user that entered !join the new player
 		 * prints out message confirming
 		 */
+		
 		if ( e.getMessage().getContentRaw().contains(Variables.getPrefix() + "join") )
 		{
 			player = e.getAuthor().getName();
@@ -76,9 +77,11 @@ public class TOSPreGame extends ListenerAdapter{
 				{
 					//gameActive = true;
 					e.getChannel().sendMessage("The game has now started! You will now recieve a DM of your role").queue();
+
 					//Call a seperate function that listens to commands (quit, accuse *playerName*, vote, abilities)
 					g.charSelect(playerList);
-					
+					e.getChannel().sendMessage("Day 1 has now started !");
+					g.dayTime();
 				}
 			}
 			else

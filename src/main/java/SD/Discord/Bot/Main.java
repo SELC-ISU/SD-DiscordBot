@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.security.auth.login.LoginException;
 import javax.swing.BoxLayout;
@@ -24,6 +25,10 @@ import javax.swing.JTextField;
 import com.esotericsoftware.yamlbeans.YamlReader;
 import com.esotericsoftware.yamlbeans.YamlWriter;
 
+import SD.Discord.Music.CommandManager;
+import SD.Discord.Music.MusicListener;
+import events.GuildMemberJoin;
+import events.HelloEvent;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 
@@ -51,6 +56,9 @@ import net.dv8tion.jda.api.JDABuilder;
  *  
  *  	YamlBeans
  *  	compile "com.esotericsoftware.yamlbeans:yamlbeans:1.06"
+ *  
+ *  	Music Bot
+ *  	implementation 'com.sedmelluq:lavaplayer:1.3.34'
  *  
  *  	GRADLE PLUGINS
  *  	id 'java'
@@ -268,9 +276,16 @@ public class Main {
 	@SuppressWarnings("unused")
 	public static boolean runBot(String token) {
 		JDA jda = null;
+
 		try {
 			jda = new JDABuilder(token)
-					.addEventListeners(new CustomCommandListener(), new RandomGames(), new TOSPreGame(), new TOSGame())
+					.addEventListeners(new CustomCommandListener(),
+							new RandomGames(), 
+							new TOSPreGame(), 
+							new TOSGame(), 
+							new HelloEvent(), 
+							new GuildMemberJoin(), 
+							new MusicListener(new CommandManager(new Random())))
 					.build().awaitReady();
 			return true;
 		} catch (LoginException ex) {
@@ -281,5 +296,5 @@ public class Main {
 			return false;
 		}
 	}
-
+	
 }
