@@ -26,10 +26,12 @@ import javax.swing.SwingUtilities;
 import com.esotericsoftware.yamlbeans.YamlReader;
 import com.esotericsoftware.yamlbeans.YamlWriter;
 
+import SD.Discord.Games.RandomGames;
+import SD.Discord.Games.TOSPreGame;
+import SD.Discord.Games.TOSRoles.ResponseListener;
 import SD.Discord.Music.CommandManager;
 import SD.Discord.Music.MusicListener;
 import events.GuildMemberJoin;
-import events.HelloEvent;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 
@@ -328,12 +330,10 @@ public class Main {
 
 		try {
 			jda = new JDABuilder(token)
-
 					.addEventListeners(new CustomCommandListener(),
 							new RandomGames(), 
-							new TOSPreGame(), 
-							new TOSGame(), 
-							new HelloEvent(), 
+							new TOSPreGame(),
+							new ResponseListener(),
 							new GuildMemberJoin(), 
 							new MusicListener(new CommandManager(new Random())))
 					.build().awaitReady();

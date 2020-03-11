@@ -1,4 +1,4 @@
-package SD.Discord.Bot;
+package SD.Discord.Games;
 
 
 import java.io.BufferedReader;
@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import SD.Discord.Bot.Variables;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 

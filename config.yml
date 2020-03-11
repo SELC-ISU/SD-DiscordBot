@@ -1,9 +1,0 @@
-commands02779: 
-- ping
-- custom
-- anotherexample
-prefix: '!'
-ping: '**pong**'
-custom: What you want the bot to say back goes here
-anotherexample: Create new lines by typing "&n;"!
-token: NjcwMDg0ODQ4NTA1MDYxMzc2.Xl59Ww.FwyERLIHekFR2PtIzriVYivoaj4

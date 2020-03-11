@@ -1,17 +1,20 @@
-package SD.Discord.Bot;
+package SD.Discord.Games;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import SD.Discord.Bot.Variables;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class TOSPreGame extends ListenerAdapter{
 
 	//Create lists for players and messages sent
-	List<String> playerList = new ArrayList<String>();
+	List<User> playerList = new ArrayList<User>();
 	List<String> messageIds = new ArrayList<String>();
 	
+	@SuppressWarnings("unused")
 	public void onMessageReceived(MessageReceivedEvent e)
 	{
 		
@@ -39,7 +42,7 @@ public class TOSPreGame extends ListenerAdapter{
 		if ( e.getMessage().getContentRaw().equalsIgnoreCase(Variables.getPrefix() + "join") )
 		{
 			player = e.getAuthor().getName();
-			if ( playerList.contains(player) == true)
+			if ( playerList.contains(e.getAuthor()) == true)
 			{
 				e.getChannel().sendMessage(player + " has already joined the game").queue();
 			}
@@ -47,8 +50,12 @@ public class TOSPreGame extends ListenerAdapter{
 			{
 				e.getChannel().sendMessage(player + " has joined the game!").queue();
 			
-				playerList.add(e.getAuthor().getName());
-				e.getChannel().sendMessage("Players on the list: " + playerList.toString()).queue();
+				playerList.add(e.getAuthor());
+				List<String> names = new ArrayList<String>();
+				for (User u : playerList) {
+					names.add(u.getName());
+				}
+				e.getChannel().sendMessage("Players on the list: " + names).queue();
 			}
 		}
 		
@@ -59,9 +66,9 @@ public class TOSPreGame extends ListenerAdapter{
 		if (e.getMessage().getContentRaw().equalsIgnoreCase(Variables.getPrefix() + "start"))
 		{
 			player = e.getAuthor().getName();
-			if (playerList.contains(player) == true)
+			if (playerList.contains(e.getAuthor()) == true)
 			{
-				if (playerList.size() < 2)
+				if (playerList.size() < 1)
 				{
 					e.getChannel().sendMessage("The minimum amount of players is 2").queue();
 				}
@@ -69,10 +76,14 @@ public class TOSPreGame extends ListenerAdapter{
 				{
 					e.getChannel().sendMessage("The maximum amount of players is 15").queue();
 				}
-			
 				else
 				{
 					e.getChannel().sendMessage("The game has now started! You will now recieve a DM of your role").queue();
+					try {
+						TOSGame game = new TOSGame(playerList, e.getTextChannel());
+					} catch (InterruptedException e1) {
+						e.getChannel().sendMessage("Something went hella wrong");
+					}
 				}
 			}
 			else
@@ -89,7 +100,7 @@ public class TOSPreGame extends ListenerAdapter{
 		{
 			player = e.getAuthor().getName();
 			
-			if ( playerList.contains(player) == false)
+			if ( playerList.contains(e.getAuthor()) == false)
 			{
 				e.getChannel().sendMessage(player + " is not in the game").queue();
 			}
@@ -97,8 +108,12 @@ public class TOSPreGame extends ListenerAdapter{
 			{
 				e.getChannel().sendMessage(player + " was removed from the game").queue();
 			
-				playerList.remove(e.getAuthor().getName());
-				e.getChannel().sendMessage("Players on the list: " + playerList.toString()).queue();
+				playerList.remove(e.getAuthor());
+				List<String> names = new ArrayList<String>();
+				for (User u : playerList) {
+					names.add(u.getName());
+				}
+				e.getChannel().sendMessage("Players on the list: " + names).queue();
 
 			}
 		}

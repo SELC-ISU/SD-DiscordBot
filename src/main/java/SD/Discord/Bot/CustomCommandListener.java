@@ -9,6 +9,7 @@ import java.util.List;
 import com.esotericsoftware.yamlbeans.YamlReader;
 
 import net.dv8tion.jda.api.entities.MessageChannel;
+import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -18,6 +19,7 @@ public class CustomCommandListener extends ListenerAdapter{
 	public void onMessageReceived(MessageReceivedEvent e)
 	{
 		if ( e.getAuthor().isBot()) return; //ignore bot messages; prevents infinite loop
+		if (!(e.getChannel() instanceof TextChannel)) return;
 		
 		String prefix = Variables.getPrefix();
 		ConfigControl configControl = null;
