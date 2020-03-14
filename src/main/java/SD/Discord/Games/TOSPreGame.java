@@ -31,9 +31,6 @@ public class TOSPreGame extends ListenerAdapter{
 			if (!e.getChannel().getName().equals(Variables.getMinigameChannel())) return;
 		}
 		
-		//process all messages 
-		System.out.println(e.getMessage().getContentRaw());
-		
 		/**
 		 * !join adds player to player list
 		 * makes the user that entered !join the new player
