@@ -7,6 +7,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,6 +18,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -272,6 +275,50 @@ public class ConfigUI {
 	}
 	
 	/**
+	 * Returns a panel for the music bot channel
+	 * @param frame
+	 * 		The frame to add it to
+	 * @return
+	 * 		The panel
+	 */
+	public static JPanel addMusicField(JFrame frame, String field) {
+		JPanel tokenPanel = new JPanel();
+		JLabel tokenLabel = new JLabel("Music Bot Channel:");
+		tokenLabel.setAlignmentX(JLabel.LEFT_ALIGNMENT);
+		tokenLabel.setAlignmentY(JLabel.CENTER_ALIGNMENT);
+		tokenLabel.setFont(new Font("Sans-Serif", Font.PLAIN, 14));
+		JTextField tokenEntry = new JTextField("", 20);
+		tokenEntry.setText(field);
+		tokenPanel.add(tokenLabel);
+		tokenPanel.add(tokenEntry);
+		tokenPanel.setBounds(10, 10, frame.getPreferredSize().width, 20);
+		tokenPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, tokenPanel.getMinimumSize().height));
+		return tokenPanel;
+	}
+	
+	/**
+	 * Returns a panel for the TOS channel
+	 * @param frame
+	 * 		The frame to add it to
+	 * @return
+	 * 		The panel
+	 */
+	public static JPanel addTOSField(JFrame frame, String field) {
+		JPanel tokenPanel = new JPanel();
+		JLabel tokenLabel = new JLabel("Minigames Channel:");
+		tokenLabel.setAlignmentX(JLabel.LEFT_ALIGNMENT);
+		tokenLabel.setAlignmentY(JLabel.CENTER_ALIGNMENT);
+		tokenLabel.setFont(new Font("Sans-Serif", Font.PLAIN, 14));
+		JTextField tokenEntry = new JTextField("", 20);
+		tokenEntry.setText(field);
+		tokenPanel.add(tokenLabel);
+		tokenPanel.add(tokenEntry);
+		tokenPanel.setBounds(10, 10, frame.getPreferredSize().width, 20);
+		tokenPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, tokenPanel.getMinimumSize().height));
+		return tokenPanel;
+	}
+	
+	/**
 	 * Returns the panel of the header text
 	 * @param frame
 	 * 		The frame to add it to
@@ -280,7 +327,7 @@ public class ConfigUI {
 	 */
 	public static JPanel addHeader(JFrame frame) {
 		JPanel header = new JPanel();
-		header.setBackground(Color.LIGHT_GRAY);
+		header.setBackground(new Color(0, 0, 255, 40));
 		JLabel label = new JLabel("<html><div style='text-align: center;'>Welcome to the SwagDragon Discord Bot!"
 				+ "<br />Please make changes to your configuration down below!</div></html>");
 		label.setAlignmentX(JLabel.CENTER);
@@ -344,7 +391,7 @@ public class ConfigUI {
 	public static JFrame openRunningFrame(boolean ableToLogin) {
 
 		//Outline of the frame
-		int width = 400;
+		int width = 300;
 		int height = 150;
 		JFrame frame = new JFrame();
 		frame.setName("RunningWindow");
@@ -354,17 +401,15 @@ public class ConfigUI {
 		frame.setLocation((int)dim.getWidth() / 2 - (width/2), (int)dim.getHeight() / 2 - (height/2));
 		
 		JPanel header = new JPanel();
-		header.setBackground(Color.LIGHT_GRAY);
+		header.setLayout(new GridBagLayout());
+		header.setBackground(new Color(0, 255, 0, 40));
 		JLabel label = new JLabel("<html><div style='text-align: center;'>The bot is running!</div></html>");
 		if (!ableToLogin) {
+			header.setBackground(new Color(255, 0, 0, 40));
 			label.setText("<html><div style='text-align: center;'>The bot is <u>not</u> running!</div></html>");
 		}
-		label.setAlignmentX(JLabel.CENTER);
-		label.setAlignmentY(JLabel.TOP);
 		label.setSize(frame.getPreferredSize().width, 100);
 		label.setFont(new Font("Sans-Serif", Font.BOLD, 18));
-		label.setBounds(50, 10, frame.getPreferredSize().width, 20);
-		label.setBackground(Color.BLACK);
 		header.add(label);
 		header.setBounds(50, 10, frame.getPreferredSize().width, 20);
 		header.setMaximumSize(new Dimension(Integer.MAX_VALUE, header.getMinimumSize().height));
@@ -374,6 +419,50 @@ public class ConfigUI {
 		frame.pack();
 		frame.setVisible(true);
 
+		return frame;
+	}
+	
+	public static JFrame openStartingFrame() {
+		int width = 400;
+		int height = 175;
+		JFrame frame = new JFrame();
+		frame.setName("StartingWindow");
+		frame.setTitle("SwagDragon Discord Bot");
+		frame.setPreferredSize(new Dimension(width, height));
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		frame.setLocation((int)dim.getWidth() / 2 - (width/2), (int)dim.getHeight() / 2 - (height/2));
+		
+		JPanel header = new JPanel();
+		header.setBackground(Color.LIGHT_GRAY);
+		JLabel label = new JLabel("<html><div style='text-align: center;'>Revving up...</div></html>");
+		label.setAlignmentX(JLabel.CENTER);
+		label.setAlignmentY(JLabel.TOP);
+		label.setSize(frame.getPreferredSize().width, 100);
+		label.setFont(new Font("Sans-Serif", Font.BOLD, 18));
+		label.setBounds(0, 0, frame.getPreferredSize().width, 20);
+		label.setBackground(Color.BLACK);
+		header.add(label);
+		header.setBounds(0, 0, frame.getPreferredSize().width, 30);
+		header.setMaximumSize(new Dimension(Integer.MAX_VALUE, header.getMinimumSize().height));
+		frame.add(header);
+		
+		Icon img = new ImageIcon("images/loading.gif");
+		JLabel gif = new JLabel(img);
+		int gifwidth = 50;
+		int x_coord = (int) (frame.getPreferredSize().getWidth() / 2) - (gifwidth / 2);
+		int y_coord = (int) (frame.getPreferredSize().getHeight() / 2) - (gifwidth / 2);
+		gif.setBounds(x_coord, y_coord, gifwidth, gifwidth);
+		gif.setSize(gifwidth, gifwidth);
+		gif.setMaximumSize(new Dimension(gifwidth, gifwidth));
+		gif.setMinimumSize(new Dimension(gifwidth, gifwidth));
+		gif.setPreferredSize(new Dimension(gifwidth, gifwidth));
+		frame.add(gif);
+		
+		frame.setResizable(false);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.pack();
+		frame.setVisible(true);
+		
 		return frame;
 	}
 

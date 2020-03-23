@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.esotericsoftware.yamlbeans.YamlReader;
 
+import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -45,10 +46,15 @@ public class CustomCommandListener extends ListenerAdapter{
 		for (String command : commandList) {
 			if (e.getMessage().getContentRaw().equalsIgnoreCase(prefix + command)) {
 				String toSendRaw = (String) map.get(command);
+				MessageChannel c = e.getChannel();
+				if (toSendRaw.startsWith("##DM##")) {
+					c = e.getAuthor().openPrivateChannel().complete();
+					toSendRaw = toSendRaw.substring(6);
+				}
 				String[] toSendLines = toSendRaw.split("&n;");
 				for (String toSend : toSendLines) {
 					toSend = Variables.replaceWithRoles(toSend, e.getGuild());
-					e.getChannel().sendMessage(toSend).queue();
+					c.sendMessage(toSend).queue();
 				}
 			}
 		}

@@ -1,4 +1,5 @@
 commands02779: 
+<<<<<<< HEAD
 - deletethis
 - ping
 - custom
@@ -11,3 +12,13 @@ custom: What you want the bot to say back goes here
 anotherexample: Create new lines by typing "&n;"!
 token: NjcwMDg0ODQ4NTA1MDYxMzc2.Xlazew.HGkUZ8kWfIoufc7vRB6yHlJwH1I
 mention: If you are going to mention, use the '_' to represent a space in the name.
+=======
+- ping
+- custom
+- anotherexample
+prefix: '!'
+ping: '**pong**'
+custom: What you want the bot to say back goes here
+anotherexample: Create new lines by typing "&n;"!
+token: NjcwMDg0ODQ4NTA1MDYxMzc2.Xl59Ww.FwyERLIHekFR2PtIzriVYivoaj4
+>>>>>>> ea8d5b95f8fb41f7ad7cba1f0f56597a193f5c67
