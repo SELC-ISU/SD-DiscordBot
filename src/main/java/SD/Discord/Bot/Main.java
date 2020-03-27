@@ -28,6 +28,8 @@ import org.slf4j.LoggerFactory;
 import com.esotericsoftware.yamlbeans.YamlReader;
 import com.esotericsoftware.yamlbeans.YamlWriter;
 
+import SD.Discord.Games.Clapify;
+import SD.Discord.Games.GuessTheNumber;
 import SD.Discord.Games.RandomGames;
 import SD.Discord.Games.TOSPreGame;
 import SD.Discord.Games.TOSRoles.ResponseListener;
@@ -337,6 +339,8 @@ public class Main {
 					.setToken(token)
 					.addEventListeners(new CustomCommandListener(),
 							new RandomGames(), 
+							new GuessTheNumber(),
+							new Clapify(),
 							new TOSPreGame(),
 							new ResponseListener(),
 							new GuildMemberJoin(), 
