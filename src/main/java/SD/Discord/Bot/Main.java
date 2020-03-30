@@ -29,6 +29,9 @@ import SD.Discord.Music.CommandManager;
 import SD.Discord.Music.MusicListener;
 import events.GuildMemberJoin;
 import events.HelloEvent;
+import events.ImageEvent;
+import events.RandomImage;
+import events.EmoteEvent;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 
@@ -285,7 +288,10 @@ public class Main {
 							new TOSGame(), 
 							new HelloEvent(), 
 							new GuildMemberJoin(), 
-							new MusicListener(new CommandManager(new Random())))
+							new MusicListener(new CommandManager(new Random())),
+							new ImageEvent(),
+							new RandomImage(),
+							new EmoteEvent())
 					.build().awaitReady();
 			return true;
 		} catch (LoginException ex) {
