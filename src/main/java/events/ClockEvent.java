@@ -7,7 +7,7 @@ import java.time.*;
 
 
 
-	public class ImageEvent extends ListenerAdapter 
+	public class ClockEvent extends ListenerAdapter 
 	{
 		public void onMessageReceived(MessageReceivedEvent event)
 		{

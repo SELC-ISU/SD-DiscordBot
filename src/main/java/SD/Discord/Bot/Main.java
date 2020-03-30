@@ -37,9 +37,11 @@ import SD.Discord.Music.MusicMain;
 import events.GuildMemberJoin;
 
 import events.HelloEvent;
-import events.ImageEvent;
+import events.ClockEvent;
 import events.RandomImage;
 import events.EmoteEvent;
+import events.ClockEvent;
+import events.GuessGame;
 
 import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDA;
@@ -350,11 +352,12 @@ public class Main {
 							new TOSPreGame(),
 							new ResponseListener(),
 							new GuildMemberJoin(), 
-							new MusicListener(new CommandManager(new Random())),
-							new ImageEvent(),
+							//new MusicListener(new CommandManager(new Random())),
+							new ClockEvent(),
 							new RandomImage(),
 							new EmoteEvent(),
-							new MusicMain())
+							new MusicMain(),
+							new GuessGame())
 					.build().awaitReady();
 			return true;
 		} catch (LoginException ex) {

@@ -6,8 +6,10 @@ commands02779:
 - mention
 deletethis: To delete a command just erase the command name.
 prefix: '!'
+music-channel: 
 ping: pong
 custom: What you want the bot to say back goes here
 anotherexample: Create new lines by typing "&n;"!
-token: NjcwMDg0ODQ4NTA1MDYxMzc2.Xnqjog.BvBe6bqQPl3aBcw4-AHY-3hy-Cs
+mg-channel: 
+token: NjcwMDg0ODQ4NTA1MDYxMzc2.XoJYwA.7_oG0rvJ3Z_5KQc-KdEOhVbIPxo
 mention: If you are going to mention, use the '_' to represent a space in the name.
