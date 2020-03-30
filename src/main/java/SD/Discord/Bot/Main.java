@@ -28,6 +28,7 @@ import org.slf4j.LoggerFactory;
 import com.esotericsoftware.yamlbeans.YamlReader;
 import com.esotericsoftware.yamlbeans.YamlWriter;
 
+import SD.Discord.Games.EightBall;
 import SD.Discord.Games.RandomGames;
 import SD.Discord.Games.TOSPreGame;
 import SD.Discord.Games.TOSRoles.ResponseListener;
@@ -336,7 +337,8 @@ public class Main {
 			jda = new JDABuilder(AccountType.BOT)
 					.setToken(token)
 					.addEventListeners(new CustomCommandListener(),
-							new RandomGames(), 
+							new RandomGames(),
+							new EightBall(),
 							new TOSPreGame(),
 							new ResponseListener(),
 							new GuildMemberJoin(), 
