@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import javax.security.auth.login.LoginException;
 import javax.swing.BoxLayout;
@@ -21,17 +20,28 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.esotericsoftware.yamlbeans.YamlReader;
 import com.esotericsoftware.yamlbeans.YamlWriter;
 
-import SD.Discord.Music.CommandManager;
-import SD.Discord.Music.MusicListener;
+import SD.Discord.Games.Clapify;
+import SD.Discord.Games.GuessTheNumber;
+import SD.Discord.Games.RandomGames;
+import SD.Discord.Games.TOSPreGame;
+import SD.Discord.Games.TOSRoles.ResponseListener;
+import SD.Discord.Music.MusicMain;
 import events.GuildMemberJoin;
+
 import events.HelloEvent;
 import events.ImageEvent;
 import events.RandomImage;
 import events.EmoteEvent;
+
+import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 
@@ -141,6 +151,9 @@ public class Main {
 			map.put("anotherexample", "Create new lines by typing \"&n;\"!");
 			map.put("deletethis", "To delete a command just erase the command name.");
 			map.put("mention", "If you are going to mention, use the '_' to represent a space in the name.");
+			map.put("dm", "##DM## Start a command response like so for it to be DM'ed to the author.");
+			map.put("music-channel", "*");
+			map.put("mg-channel", "*");
 			writer.write(map);
 			configControl.setWriter(writer);
 		}
@@ -156,6 +169,8 @@ public class Main {
 		List<Object> configObj = configControl.getConfigObjects();
 		String prefixChars = "";
 		String botToken = "";
+		String music = "";
+		String tos = "";
 		HashMap<String, Object> commandList = new HashMap<String, Object>();
 		List<JPanel> commandEntries = new ArrayList<JPanel>();
 
@@ -170,6 +185,12 @@ public class Main {
 					}
 					else if (key.equalsIgnoreCase("token")) {
 						botToken = (String) map.get(key);
+					}
+					else if (key.equalsIgnoreCase("music-channel")) {
+						music = (String) map.get(key);
+					}
+					else if (key.equalsIgnoreCase("mg-channel")) {
+						tos = (String) map.get(key);
 					}
 					else {
 						commandList.put(key, map.get(key));
@@ -197,6 +218,14 @@ public class Main {
 		JPanel prefixPanel = ConfigUI.addPrefixField(frame, prefixChars);
 		content.add(prefixPanel, BorderLayout.SOUTH);
 		
+		//Music Entry
+		JPanel musicPanel = ConfigUI.addMusicField(frame, music);
+		content.add(musicPanel, BorderLayout.SOUTH);
+				
+		//Minigame Entry
+		JPanel tosPanel = ConfigUI.addTOSField(frame, tos);
+		content.add(tosPanel, BorderLayout.SOUTH);
+		
 		//Custom Commands
 		for (String key : commandList.keySet()) {
 			JPanel newEntry = ConfigUI.customCommandEntry(key, commandList.get(key).toString());
@@ -223,6 +252,10 @@ public class Main {
 					newMap.put("token", newToken);
 					String newPrefix = ConfigUI.getTextFromField(prefixPanel);
 					newMap.put("prefix", newPrefix);
+					String newMusic = ConfigUI.getTextFromField(musicPanel);
+					newMap.put("music-channel", newMusic);
+					String newTOS = ConfigUI.getTextFromField(tosPanel);
+					newMap.put("mg-channel", newTOS);
 					for (JPanel custom : commandEntries) {
 						String key = null;
 						String value = null;
@@ -248,13 +281,38 @@ public class Main {
 					newMap.put("commands02779", commands);
 					yamlW.write(newMap);
 					yamlW.close();
+					Variables.setPrefix(newPrefix);
+					Variables.setMusicChannel(newMusic);
+					Variables.setMinigameChannel(newTOS);
+					
 					frame.dispose();
 					
-					Variables.setPrefix(newPrefix);
-					boolean ableToLogin = runBot(newToken);
+					JFrame startingFrame = ConfigUI.openStartingFrame();
+					startingFrame.pack();
+
+					new Thread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            try {
+                                Thread.sleep(2100);
+                            } catch (InterruptedException ex) {
+                            }
+                            SwingUtilities.invokeLater(new Runnable() {
+
+                                @Override
+                                public void run() {
+                                	boolean ableToLogin = runBot(newToken);
+        							
+        							startingFrame.dispose();
+        							
+        							JFrame newFrame = ConfigUI.openRunningFrame(ableToLogin);
+        							newFrame.pack();
+                                }
+                            });
+                        }
+                    }).start();
 					
-					JFrame newFrame = ConfigUI.openRunningFrame(ableToLogin);
-					newFrame.pack();
 				}
 				catch (IOException ex) {
 					ex.printStackTrace();
@@ -277,21 +335,26 @@ public class Main {
 	}
 	
 	@SuppressWarnings("unused")
-	public static boolean runBot(String token) {
+	public static synchronized boolean runBot(String token) {
 		JDA jda = null;
-
+		
+        Logger logger = LoggerFactory.getLogger(Main.class);
+		
 		try {
-			jda = new JDABuilder(token)
+			jda = new JDABuilder(AccountType.BOT)
+					.setToken(token)
 					.addEventListeners(new CustomCommandListener(),
 							new RandomGames(), 
-							new TOSPreGame(), 
-							new TOSGame(), 
-							new HelloEvent(), 
+							new GuessTheNumber(),
+							new Clapify(),
+							new TOSPreGame(),
+							new ResponseListener(),
 							new GuildMemberJoin(), 
 							new MusicListener(new CommandManager(new Random())),
 							new ImageEvent(),
 							new RandomImage(),
-							new EmoteEvent())
+							new EmoteEvent(),
+							new MusicMain())
 					.build().awaitReady();
 			return true;
 		} catch (LoginException ex) {

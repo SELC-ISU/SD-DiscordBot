@@ -1,4 +1,4 @@
-package SD.Discord.Bot;
+package SD.Discord.Games;
 
 
 import java.io.BufferedReader;
@@ -7,12 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import SD.Discord.Bot.Variables;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class RandomGames extends ListenerAdapter{
-	
-	List<String> topicList = new ArrayList<String>();
 
 	public void onMessageReceived(MessageReceivedEvent e)
 	{
@@ -23,12 +22,12 @@ public class RandomGames extends ListenerAdapter{
 		
 		Random r = new Random();
 		
-		if ( e.getMessage().getContentRaw().contains("!dice"))
+		if ( e.getMessage().getContentRaw().equalsIgnoreCase(Variables.getPrefix() + "dice"))
 		{
 			e.getChannel().sendMessage("The dice value was " + (r.nextInt(6) + 1)).queue();
 		}
 		
-		if ( e.getMessage().getContentRaw().contains("!coin"))
+		if ( e.getMessage().getContentRaw().equalsIgnoreCase(Variables.getPrefix() + "coin"))
 		{	
 			if ( r.nextInt(2) == 0)
 			{
@@ -41,10 +40,13 @@ public class RandomGames extends ListenerAdapter{
 			
 		}
 		
-		if ( e.getMessage().getContentRaw().contains("!topic"))
+		if ( e.getMessage().getContentRaw().equalsIgnoreCase(Variables.getPrefix() + "topic"))
 		{
-			readFile("SwagDragonsTopicList.txt");
-			System.out.println(topicList.toString());
+			List<String> topicList = readFile("SwagDragonsTopicList.txt");
+			int length = topicList.size();
+			int j = new Random().nextInt(length);
+			String topic = topicList.get(j);
+			e.getChannel().sendMessage(topic).queue();
 		}
 	}
 	

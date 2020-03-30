@@ -6,6 +6,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class HelloEvent extends ListenerAdapter 
 {
+
 	public void onMessageReceived(MessageReceivedEvent event)
 	{
 		if ( event.getMessage().getContentRaw().contains("hello"))
