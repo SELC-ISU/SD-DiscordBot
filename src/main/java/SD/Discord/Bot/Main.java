@@ -29,12 +29,15 @@ import com.esotericsoftware.yamlbeans.YamlReader;
 import com.esotericsoftware.yamlbeans.YamlWriter;
 
 import SD.Discord.Games.Clapify;
+import SD.Discord.Games.EightBall;
 import SD.Discord.Games.GuessTheNumber;
 import SD.Discord.Games.RandomGames;
 import SD.Discord.Games.TOSPreGame;
 import SD.Discord.Games.TOSRoles.ResponseListener;
 import SD.Discord.Music.MusicMain;
+import events.EmoteEvent;
 import events.GuildMemberJoin;
+
 
 import events.HelloEvent;
 import events.ClockEvent;
@@ -42,7 +45,7 @@ import events.RandomImage;
 import events.EmoteEvent;
 import events.ClockEvent;
 import events.GuessGame;
-
+import events.RandomImage;
 import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -346,6 +349,8 @@ public class Main {
 			jda = new JDABuilder(AccountType.BOT)
 					.setToken(token)
 					.addEventListeners(new CustomCommandListener(),
+							new RandomGames(),
+							new EightBall(),
 							new RandomGames(), 
 							new GuessTheNumber(),
 							new Clapify(),
@@ -354,6 +359,7 @@ public class Main {
 							new GuildMemberJoin(), 
 							//new MusicListener(new CommandManager(new Random())),
 							new ClockEvent(),
+							new GuildMemberJoin(),
 							new RandomImage(),
 							new EmoteEvent(),
 							new MusicMain(),
