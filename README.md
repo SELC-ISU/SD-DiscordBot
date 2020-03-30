@@ -11,7 +11,6 @@ Created by team <strong>Swag Dragons</strong>:
 <ul>
   <li>Nathan Schenck</li>
   <li>Dylan Hanrahan</li>
-  <li>Ed Dao</li>
   <li>Felipe Bautista</li>
 </ul>
 

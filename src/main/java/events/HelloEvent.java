@@ -1,22 +1,18 @@
 package events;
 
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+//import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class HelloEvent extends ListenerAdapter 
 {
-	
-	public void onGuildMessagedReceived(GuildMessageReceivedEvent event)
+
+	public void onMessageReceived(MessageReceivedEvent event)
 	{
-		String messageSent = event.getMessage().getContentRaw();
-		
-		if(messageSent.equalsIgnoreCase("hello")) 
+		if ( event.getMessage().getContentRaw().contains("hello"))
 		{
-			event.getChannel().sendMessage("Hi!").queue();
+			event.getChannel().sendMessage("Hello welcome " + event.getMember().getAsMention()).queue();
 		}
 		
-		
 	}
-	
-
 }

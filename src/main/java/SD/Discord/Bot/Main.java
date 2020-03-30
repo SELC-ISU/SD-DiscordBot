@@ -28,12 +28,17 @@ import org.slf4j.LoggerFactory;
 import com.esotericsoftware.yamlbeans.YamlReader;
 import com.esotericsoftware.yamlbeans.YamlWriter;
 
+import SD.Discord.Games.Clapify;
 import SD.Discord.Games.EightBall;
+import SD.Discord.Games.GuessTheNumber;
 import SD.Discord.Games.RandomGames;
 import SD.Discord.Games.TOSPreGame;
 import SD.Discord.Games.TOSRoles.ResponseListener;
 import SD.Discord.Music.MusicMain;
+import events.EmoteEvent;
 import events.GuildMemberJoin;
+import events.ImageEvent;
+import events.RandomImage;
 import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -339,9 +344,15 @@ public class Main {
 					.addEventListeners(new CustomCommandListener(),
 							new RandomGames(),
 							new EightBall(),
+							new RandomGames(), 
+							new GuessTheNumber(),
+							new Clapify(),
 							new TOSPreGame(),
 							new ResponseListener(),
-							new GuildMemberJoin(), 
+							new GuildMemberJoin(),
+							new ImageEvent(),
+							new RandomImage(),
+							new EmoteEvent(),
 							new MusicMain())
 					.build().awaitReady();
 			return true;
