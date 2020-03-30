@@ -14,7 +14,7 @@ public class RandomImage extends ListenerAdapter  {
 				"https://theawesomedaily.com/wp-content/uploads/2017/01/random-pictures-that-make-no-sense-18-1.jpeg",
 				"https://www.dumpaday.com/wp-content/uploads/2018/06/photos-1.jpg"
 		};
-		if(image.getMessage().getContentRaw().contains("Random Image")){
+		if(image.getMessage().getContentRaw().contains("!RandomImage")){
 			Random rand = new Random();
 			int number = rand.nextInt(images.length);
 			EmbedBuilder guess = new EmbedBuilder();

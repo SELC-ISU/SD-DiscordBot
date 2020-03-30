@@ -12,7 +12,7 @@ import java.time.*;
 		public void onMessageReceived(MessageReceivedEvent event)
 		{
 			
-			if(event.getMessage().getContentRaw().contains("!What time it is")) {
+			if(event.getMessage().getContentRaw().contains("!time")) {
 				 // create a Zone Id for Europe/Paris 
 		        ZoneId zoneId = ZoneId.of("US/Central"); 
 		  
