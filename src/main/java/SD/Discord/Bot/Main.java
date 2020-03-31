@@ -37,7 +37,14 @@ import SD.Discord.Games.TOSRoles.ResponseListener;
 import SD.Discord.Music.MusicMain;
 import events.EmoteEvent;
 import events.GuildMemberJoin;
-import events.ImageEvent;
+
+
+import events.HelloEvent;
+import events.ClockEvent;
+import events.RandomImage;
+import events.EmoteEvent;
+import events.ClockEvent;
+import events.GuessGame;
 import events.RandomImage;
 import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDA;
@@ -349,11 +356,14 @@ public class Main {
 							new Clapify(),
 							new TOSPreGame(),
 							new ResponseListener(),
+							new GuildMemberJoin(), 
+							//new MusicListener(new CommandManager(new Random())),
+							new ClockEvent(),
 							new GuildMemberJoin(),
-							new ImageEvent(),
 							new RandomImage(),
 							new EmoteEvent(),
-							new MusicMain())
+							new MusicMain(),
+							new GuessGame())
 					.build().awaitReady();
 			return true;
 		} catch (LoginException ex) {
