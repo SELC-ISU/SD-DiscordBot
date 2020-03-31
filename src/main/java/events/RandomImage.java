@@ -24,8 +24,4 @@ public class RandomImage extends ListenerAdapter  {
 			
 		}
 	}
-	
-	
-	
-
 }
