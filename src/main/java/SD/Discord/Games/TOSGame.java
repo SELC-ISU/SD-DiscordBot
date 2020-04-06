@@ -21,7 +21,7 @@ public class TOSGame extends ListenerAdapter
 	private int numMafia;
 	private boolean gameRunning;
 	
-	public TOSGame() throws InterruptedException
+	public TOSGame(List<User> lobby, TextChannel channel) throws InterruptedException
 	{
 		Runnable game = new Runnable() {
 

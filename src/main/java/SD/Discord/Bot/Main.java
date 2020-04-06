@@ -35,16 +35,10 @@ import SD.Discord.Games.RandomGames;
 import SD.Discord.Games.TOSPreGame;
 import SD.Discord.Games.TOSRoles.ResponseListener;
 import SD.Discord.Music.MusicMain;
-import events.EmoteEvent;
-import events.GuildMemberJoin;
-
-
-import events.HelloEvent;
 import events.ClockEvent;
-import events.RandomImage;
 import events.EmoteEvent;
-import events.ClockEvent;
 import events.GuessGame;
+import events.GuildMemberJoin;
 import events.RandomImage;
 import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDA;
@@ -77,6 +71,9 @@ import net.dv8tion.jda.api.JDABuilder;
  *  
  *  	Music Bot
  *  	implementation 'com.sedmelluq:lavaplayer:1.3.34'
+ *  
+ *  	JSoup
+ *  	compile 'org.jsoup:jsoup:1.13.1'
  *  
  *  	GRADLE PLUGINS
  *  	id 'java'

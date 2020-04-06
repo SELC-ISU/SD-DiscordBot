@@ -3,10 +3,7 @@ package SD.Discord.Games;
 import java.util.ArrayList;
 import java.util.List;
 
-<<<<<<< HEAD:src/main/java/SD/Discord/Bot/TOSPreGame.java
-=======
 import SD.Discord.Bot.Variables;
->>>>>>> b20fdf692f3a3d99f2007f8a89730753b1a467f2:src/main/java/SD/Discord/Games/TOSPreGame.java
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -20,9 +17,6 @@ public class TOSPreGame extends ListenerAdapter{
 	@SuppressWarnings("unused")
 	public void onMessageReceived(MessageReceivedEvent e)
 	{
-
-		TOSGame g = new TOSGame();
-
 		//Initialize player
 		String player = "";
 		String playersInGame = "";

@@ -1,3 +1,5 @@
+package SD.Discord.Games.TOSRoles;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,6 +71,13 @@ public class Sheriff implements Role{
 				+ "They choose which member of the town they will interrogate. "
 				+ "Interrogating tells you if the person is suspicious or not."
 				+ "The Sheriff wins when only Town are left standing.";
+	}
+
+
+	@Override
+	public void kill(Role role) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

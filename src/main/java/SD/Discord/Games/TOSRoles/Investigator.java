@@ -1,3 +1,5 @@
+package SD.Discord.Games.TOSRoles;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,6 +71,13 @@ public class Investigator implements Role{
 				+ "They choose which member of the town they will investigate. "
 				+ "Investigating tells you what the persons class does, not who they are."
 				+ "The Investigator wins when only Town are left standing.";
+	}
+
+
+	@Override
+	public void kill(Role role) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
