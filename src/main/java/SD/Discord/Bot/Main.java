@@ -37,15 +37,11 @@ import SD.Discord.Games.TOSRoles.ResponseListener;
 import SD.Discord.Music.MusicMain;
 import events.EmoteEvent;
 import events.GuildMemberJoin;
-
-
-import events.HelloEvent;
 import events.ClockEvent;
 import events.RandomImage;
-import events.EmoteEvent;
-import events.ClockEvent;
 import events.GuessGame;
-import events.RandomImage;
+import events.Filter;
+import events.FilterOnOff;
 import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -363,7 +359,9 @@ public class Main {
 							new RandomImage(),
 							new EmoteEvent(),
 							new MusicMain(),
-							new GuessGame())
+							new GuessGame(),
+							new Filter(),
+							new FilterOnOff())
 					.build().awaitReady();
 			return true;
 		} catch (LoginException ex) {

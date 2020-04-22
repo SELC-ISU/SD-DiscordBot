@@ -15,7 +15,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class TOSGame extends ListenerAdapter
 {
-	//(List<String> lobby) 
+	//(List<String> lobby)
 	private int numTown;
 	private int numNeut;
 	private int numMafia;

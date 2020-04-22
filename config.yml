@@ -1,37 +1,5 @@
-commands02779: 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> d3c8a0898da5bd02148410852a103bf9116d248c
-- deletethis
-- ping
-- custom
-- anotherexample
-- mention
-deletethis: To delete a command just erase the command name.
-prefix: '!'
-<<<<<<< HEAD
-ping: pong
-custom: What you want the bot to say back goes here
-anotherexample: Create new lines by typing "&n;"!
-token: NjcwMDg0ODQ4NTA1MDYxMzc2.Xlazew.HGkUZ8kWfIoufc7vRB6yHlJwH1I
-mention: If you are going to mention, use the '_' to represent a space in the name.
-=======
-- ping
-- custom
-- anotherexample
-prefix: '!'
-ping: '**pong**'
-custom: What you want the bot to say back goes here
-anotherexample: Create new lines by typing "&n;"!
-token: NjcwMDg0ODQ4NTA1MDYxMzc2.Xl59Ww.FwyERLIHekFR2PtIzriVYivoaj4
->>>>>>> ea8d5b95f8fb41f7ad7cba1f0f56597a193f5c67
-=======
+commands02779: []
+prefix: 
 music-channel: 
-ping: pong
-custom: What you want the bot to say back goes here
-anotherexample: Create new lines by typing "&n;"!
 mg-channel: 
-token: NjcwMDg0ODQ4NTA1MDYxMzc2.XoJYwA.7_oG0rvJ3Z_5KQc-KdEOhVbIPxo
-mention: If you are going to mention, use the '_' to represent a space in the name.
->>>>>>> d3c8a0898da5bd02148410852a103bf9116d248c
+token: NjcwMDg0ODQ4NTA1MDYxMzc2.XqDBnA.MDuXNDTpr7298WImvAninymEmJI
