@@ -1,4 +1,4 @@
-package SD.Discord.Games;
+package SD.Discord.Util;
 
 import java.util.Random;
 

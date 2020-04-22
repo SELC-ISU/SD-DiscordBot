@@ -1,4 +1,4 @@
-package SD.Discord.Games;
+package SD.Discord.Util;
 
 import SD.Discord.Bot.Variables;
 import net.dv8tion.jda.api.entities.MessageChannel;

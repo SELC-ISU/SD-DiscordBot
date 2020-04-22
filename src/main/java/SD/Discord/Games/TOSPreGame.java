@@ -18,9 +18,6 @@ public class TOSPreGame extends ListenerAdapter{
 	@SuppressWarnings("unused")
 	public void onMessageReceived(MessageReceivedEvent e)
 	{
-
-		TOSGame g = new TOSGame();
-
 		//Initialize player
 		String player = "";
 		String playersInGame = "";
