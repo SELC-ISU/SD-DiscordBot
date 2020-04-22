@@ -29,6 +29,7 @@ public class RoleController {
 		List<Role> allRolesList = new ArrayList<Role>();
 		allRolesList.add(new Godfather());
 		allRolesList.add(new Doctor());
+		allRolesList.add(new SerialKiller());
 		allRoleList = allRolesList;
 		killList = new HashMap<Role, Role>();
 	}
