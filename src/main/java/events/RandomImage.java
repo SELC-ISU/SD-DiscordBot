@@ -21,7 +21,6 @@ public class RandomImage extends ListenerAdapter  {
 			guess.setImage(images[number]);
 			guess.setColor(Color.red);
 			image.getChannel().sendMessage(guess.build()).queue();
-			
 		}
 	}
 }

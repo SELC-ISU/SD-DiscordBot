@@ -47,7 +47,7 @@ public class GuessGame extends ListenerAdapter {
 		
 		message = message.substring(Variables.getPrefix().length());
 		
-		if (message.equalsIgnoreCase("guessthecountry")) {
+		if (message.equalsIgnoreCase("!guessthecountry")) {
 			country = new EmbedBuilder();
 			Random rand = new Random();
 			int number = rand.nextInt(countries.length);

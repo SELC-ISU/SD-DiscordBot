@@ -91,13 +91,13 @@ public class TOSPreGame extends ListenerAdapter{
 				{
 					//gameActive = true;
 					e.getChannel().sendMessage("The game has now started! You will now recieve a DM of your role").queue();
-
+				
 					try {
 						TOSGame game = new TOSGame(playerList, e.getTextChannel());
 					} catch (InterruptedException e1) {
 						e.getChannel().sendMessage("Something went hella wrong");
 					}
-
+				
 				}
 			}
 			else
@@ -148,10 +148,7 @@ public class TOSPreGame extends ListenerAdapter{
 		{
 			player = e.getAuthor().getName();
 		}
-		
+	
 		
 	}
-	
-	
-	
 }

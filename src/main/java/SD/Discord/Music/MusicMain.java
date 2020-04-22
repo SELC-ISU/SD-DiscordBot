@@ -1,5 +1,8 @@
 package SD.Discord.Music;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,6 +16,7 @@ import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 
 import SD.Discord.Bot.Variables;
 import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -23,6 +27,7 @@ public class MusicMain extends ListenerAdapter {
 
   private final AudioPlayerManager playerManager;
   private final Map<Long, GuildMusicManager> musicManagers;
+  private static Member sender;
 
   public MusicMain() {
     this.musicManagers = new HashMap<>();
@@ -51,18 +56,47 @@ public class MusicMain extends ListenerAdapter {
 	  String requiredChannelName = Variables.getMusicChannel();
 	  if (!requiredChannelName.equals("*") && !event.getChannel().getName().equals(requiredChannelName)) return;
 	  
-    String[] command = event.getMessage().getContentRaw().split(" ", 2);
+    String[] command = event.getMessage().getContentRaw().split(" ");
     
-    if ((Variables.getPrefix() + "play").equals(command[0]) && command.length == 2) {
-      loadAndPlay(event.getChannel(), command[1]);
-    } else if ((Variables.getPrefix() + "skip").equals(command[0])) {
-      skipTrack(event.getChannel());
-    } else if ((Variables.getPrefix() + "stop").equals(command[0])) {
+    if ((Variables.getPrefix() + "play").equalsIgnoreCase(command[0]) && command.length > 0) {
+    	sender = event.getMember();
+    	if (isValidURL(command[1])) {
+    		loadAndPlay(event.getChannel(), command[1]);
+    	}
+    	else {
+    		String search = "";
+    		for (int i = 1; i < command.length; i++) {
+    			search += command[i] + " ";
+    		}
+    		System.out.println("Attemption to play " + search);
+    		try {
+				String url = new MusicSearch(search).getURL();
+				loadAndPlay(event.getChannel(), url);
+			} catch (IOException e) {
+				System.out.println("Could not find url");
+				e.printStackTrace();
+			}
+    	}
+    } else if ((Variables.getPrefix() + "skip").equalsIgnoreCase(command[0])) {
+    	skipTrack(event.getChannel());
+    } else if ((Variables.getPrefix() + "stop").equalsIgnoreCase(command[0])) {
         event.getGuild().getAudioManager().closeAudioConnection();
+        
       }
     
 
     super.onGuildMessageReceived(event);
+  }
+  
+  @SuppressWarnings("unused")
+  private boolean isValidURL(String urlStr) {
+	  try {
+	      URL url = new URL(urlStr);
+	      return true;
+	    }
+	    catch (MalformedURLException e) {
+	        return false;
+	    }
   }
 
   private void loadAndPlay(final TextChannel channel, final String trackUrl) {
@@ -114,9 +148,10 @@ public class MusicMain extends ListenerAdapter {
     channel.sendMessage("Skipped to next track.").queue();
   }
 
-  private static void connectToFirstVoiceChannel(AudioManager audioManager) {
+private static void connectToFirstVoiceChannel(AudioManager audioManager) {
     if (!audioManager.isConnected() && !audioManager.isAttemptingToConnect()) {
       for (VoiceChannel voiceChannel : audioManager.getGuild().getVoiceChannels()) {
+    	  if (!voiceChannel.getMembers().contains(sender)) continue;
         audioManager.openAudioConnection(voiceChannel);
         break;
       }
