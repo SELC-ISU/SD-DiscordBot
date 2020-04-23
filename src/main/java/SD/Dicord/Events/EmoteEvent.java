@@ -1,4 +1,4 @@
-package events;
+package SD.Dicord.Events;
 
 import java.awt.Color;
 
@@ -12,7 +12,6 @@ public class EmoteEvent extends ListenerAdapter   {
 	{
 		EmbedBuilder emote;
 		if(image.getMessage().getContentRaw().equalsIgnoreCase(Variables.getPrefix() + "creators")){
-			
 			emote = new EmbedBuilder();
 			emote.setImage("https://media.tenor.com/images/81715b8fb5f186200c425573421353aa/tenor.gif").setDescription("We are the swagDragons").setColor(Color.BLACK);
 			emote.setColor(Color.red);

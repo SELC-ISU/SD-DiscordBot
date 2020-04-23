@@ -1,7 +1,9 @@
-package events;
+package SD.Dicord.Events;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import java.time.*; 
+import java.time.*;
+
+import SD.Discord.Bot.Variables; 
 
 
 
@@ -12,7 +14,7 @@ import java.time.*;
 		public void onMessageReceived(MessageReceivedEvent event)
 		{
 			
-			if(event.getMessage().getContentRaw().contains("!time")) {
+			if(event.getMessage().getContentRaw().contains(Variables.getPrefix() + "time")) {
 				 // create a Zone Id for Europe/Paris 
 		        ZoneId zoneId = ZoneId.of("US/Central"); 
 		  

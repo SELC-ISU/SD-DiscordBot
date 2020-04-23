@@ -28,6 +28,14 @@ import org.slf4j.LoggerFactory;
 import com.esotericsoftware.yamlbeans.YamlReader;
 import com.esotericsoftware.yamlbeans.YamlWriter;
 
+import SD.Dicord.Events.Clear;
+import SD.Dicord.Events.ClockEvent;
+import SD.Dicord.Events.EmoteEvent;
+import SD.Dicord.Events.Filter;
+import SD.Dicord.Events.FilterOnOff;
+import SD.Dicord.Events.GuessGame;
+import SD.Dicord.Events.GuildMemberJoin;
+import SD.Dicord.Events.RandomImage;
 import SD.Discord.Games.RandomGames;
 import SD.Discord.Games.TOSPreGame;
 import SD.Discord.Games.TOSRoles.ResponseListener;
@@ -40,13 +48,6 @@ import SD.Discord.Util.GuessTheNumber;
 import SD.Discord.Util.Meme;
 import SD.Discord.Util.PollListener;
 import SD.Discord.Util.UrbanDefine;
-import events.ClockEvent;
-import events.EmoteEvent;
-import events.Filter;
-import events.FilterOnOff;
-import events.GuessGame;
-import events.GuildMemberJoin;
-import events.RandomImage;
 import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -373,7 +374,8 @@ public class Main {
 							new MusicMain(),
 							new GuessGame(),
 							new Filter(),
-							new FilterOnOff())
+							new FilterOnOff(),
+							new Clear())
 					.build().awaitReady();
 			return true;
 		} catch (LoginException ex) {

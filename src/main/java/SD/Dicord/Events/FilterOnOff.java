@@ -1,4 +1,4 @@
-package events;
+package SD.Dicord.Events;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import SD.Discord.Bot.Variables;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
