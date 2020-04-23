@@ -1,4 +1,4 @@
-package events;
+package SD.Dicord.Events;
 
 
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -42,12 +42,7 @@ public class GuessGame extends ListenerAdapter {
 			c.sendMessage("Correct! " + x.getAuthor().getAsMention()).queue();;
 			isPlaying = false;
 		}
-		
-		if (!message.startsWith(Variables.getPrefix())) return;
-		
-		message = message.substring(Variables.getPrefix().length());
-		
-		if (message.equalsIgnoreCase("!guessthecountry")) {
+		if (message.equalsIgnoreCase( Variables.getPrefix() + "guessthecountry")) {
 			country = new EmbedBuilder();
 			Random rand = new Random();
 			int number = rand.nextInt(countries.length);
