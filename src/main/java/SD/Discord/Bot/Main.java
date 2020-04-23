@@ -32,28 +32,21 @@ import SD.Discord.Games.RandomGames;
 import SD.Discord.Games.TOSPreGame;
 import SD.Discord.Games.TOSRoles.ResponseListener;
 import SD.Discord.Music.MusicMain;
-
-import events.EmoteEvent;
-import events.GuildMemberJoin;
-import events.ClockEvent;
-import events.RandomImage;
-import events.GuessGame;
-import events.Filter;
-import events.FilterOnOff;
-
 import SD.Discord.Util.Avatar;
 import SD.Discord.Util.Clapify;
 import SD.Discord.Util.Define;
 import SD.Discord.Util.EightBall;
 import SD.Discord.Util.GuessTheNumber;
 import SD.Discord.Util.Meme;
+import SD.Discord.Util.PollListener;
 import SD.Discord.Util.UrbanDefine;
 import events.ClockEvent;
 import events.EmoteEvent;
+import events.Filter;
+import events.FilterOnOff;
 import events.GuessGame;
 import events.GuildMemberJoin;
 import events.RandomImage;
-
 import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -84,7 +77,7 @@ import net.dv8tion.jda.api.JDABuilder;
  *  	compile "com.esotericsoftware.yamlbeans:yamlbeans:1.06"
  *  
  *  	Music Bot
- *  	implementation 'com.sedmelluq:lavaplayer:1.3.34'
+ *  	implementation 'com.sedmelluq:lavaplayer:1.3.47'
  *  
  *  	JSoup
  *  	compile 'org.jsoup:jsoup:1.13.1'
@@ -371,6 +364,7 @@ public class Main {
 							new Define(),
 							new Avatar(),
 							new Meme(),
+							new PollListener(),
 							new UrbanDefine(),
 							new ClockEvent(),
 							new GuildMemberJoin(),

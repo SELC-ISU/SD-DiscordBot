@@ -35,6 +35,12 @@ public class GuessGame extends ListenerAdapter {
 	public void onMessageReceived(MessageReceivedEvent x)
 	{
 		if ( x.getAuthor().isBot()) return;
+		
+		if (!Variables.getMinigameChannel().equals("*")) {
+			if (!x.getChannel().getName().equals(Variables.getMinigameChannel())) return;
+		}
+		
+		
 		String message = x.getMessage().getContentRaw();
 		MessageChannel c = x.getChannel();
 		
@@ -47,7 +53,7 @@ public class GuessGame extends ListenerAdapter {
 		
 		message = message.substring(Variables.getPrefix().length());
 		
-		if (message.equalsIgnoreCase("!guessthecountry")) {
+		if (message.equalsIgnoreCase(Variables.getPrefix() + "guessthecountry")) {
 			country = new EmbedBuilder();
 			Random rand = new Random();
 			int number = rand.nextInt(countries.length);

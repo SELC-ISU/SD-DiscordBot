@@ -18,7 +18,6 @@ public class RandomGames extends ListenerAdapter{
 		//bot messages are ignored
 		
 		if ( e.getAuthor().isBot()) return;
-		System.out.println(e.getMessage().getContentRaw());
 		
 		Random r = new Random();
 		

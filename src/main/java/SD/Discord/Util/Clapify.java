@@ -7,6 +7,12 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class Clapify extends ListenerAdapter{
 	
+	
+	/**
+	 * 
+	 * PLEASE SAVE AS UTF-8
+	 * 
+	 */
 	public void onMessageReceived(MessageReceivedEvent e) {
 		if (e.getAuthor().isBot()) return;
 		String message = e.getMessage().getContentRaw();

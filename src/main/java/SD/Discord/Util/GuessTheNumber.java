@@ -25,7 +25,7 @@ public class GuessTheNumber extends ListenerAdapter{
 		message = message.substring(Variables.getPrefix().length());
 		if (message.equalsIgnoreCase("guessthenumber")) {
 			r = new Random();
-			num = r.nextInt(100) + 1;
+			num = r.nextInt(10) + 1;
 			c.sendMessage("Guess a number between 1 and 10...").queue();
 			isSearching = true;
 		}
