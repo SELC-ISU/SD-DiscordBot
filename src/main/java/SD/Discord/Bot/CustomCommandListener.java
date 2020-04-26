@@ -26,7 +26,6 @@ public class CustomCommandListener extends ListenerAdapter{
 		try {
 			configControl = new ConfigControl(new YamlReader(new FileReader("config.yml")), null);
 		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		if (configControl == null) {

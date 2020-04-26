@@ -24,6 +24,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -464,6 +465,23 @@ public class ConfigUI {
 		frame.setVisible(true);
 		
 		return frame;
+	}
+	
+	public static JPanel addProfanityFilterButton(JFrame frame, String enabled) {
+		JPanel filterPanel = new JPanel();
+		JRadioButton filterButton = new JRadioButton();
+		JLabel filterLabel = new JLabel("Profanity Filter:");
+		filterLabel.setAlignmentX(JLabel.LEFT_ALIGNMENT);
+		filterLabel.setAlignmentY(JLabel.CENTER_ALIGNMENT);
+		filterLabel.setFont(new Font("Sans-Serif", Font.PLAIN, 14));
+		if (enabled.equals("true")) {
+		filterButton.setSelected(true);
+		}
+		filterPanel.add(filterLabel);
+		filterPanel.add(filterButton);
+		filterPanel.setBounds(10, 10, frame.getPreferredSize().width, 20);
+		filterPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, filterPanel.getMinimumSize().height));
+		return filterPanel;
 	}
 
 }

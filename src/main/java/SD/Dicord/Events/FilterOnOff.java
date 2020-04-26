@@ -4,17 +4,16 @@ import SD.Discord.Bot.Variables;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class FilterOnOff extends ListenerAdapter{
-	public static boolean filterOn = true;
 	
 	public void onMessageReceived(MessageReceivedEvent OnOff) {
 		
-		if(OnOff.getMessage().getContentRaw().equalsIgnoreCase(Variables.getPrefix() + "togglefilter") && filterOn) {
+		if(OnOff.getMessage().getContentRaw().equalsIgnoreCase(Variables.getPrefix() + "togglefilter") && Variables.isProfanityEnabled()) {
 			OnOff.getChannel().sendMessage("The curse filter has been disables by: " + OnOff.getAuthor().getAsMention()).queue();
-			filterOn = false;
+			Variables.setProfanityEnabled("false");;
 		}
-		else if(OnOff.getMessage().getContentRaw().equalsIgnoreCase(Variables.getPrefix() + "togglefilter") && !filterOn) {
+		else if(OnOff.getMessage().getContentRaw().equalsIgnoreCase(Variables.getPrefix() + "togglefilter") && !Variables.isProfanityEnabled()) {
 			OnOff.getChannel().sendMessage("The curse filter has been enable by: " + OnOff.getAuthor().getAsMention()).queue();
-			filterOn = true;
+			Variables.setProfanityEnabled("true");;
 		}
 	}
 }
