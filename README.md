@@ -38,7 +38,7 @@
   <dt>"avatar [name]"</dt>
   <dd>The bot will post the URL to the name of the server member that you input.</dd>
   <dt>"clapify [message]"</dt>
-  <dd>MAKE 👏 YOUR 👏 MESSAGES 👏 READ 👏 LOUDER</dd>
+  <dd>MAKE ðŸ‘� YOUR ðŸ‘� MESSAGES ðŸ‘� READ ðŸ‘� LOUDER</dd>
   <dt>"meme"</dt>
   <dd>Posts a new meme from the r/dankmemes subreddit.</dd>
   <dt>"guessthenumber"</dt>
@@ -46,6 +46,27 @@
 </dl>
 
 <h3>Commands (created by Felipe)</h3>
+<dl>
+	<dt>"Clear [number of messages]"</dt>
+	<dd>Clears a given number of messages in the chat no older than 2 weeks</dd>
+	<dt>"time"</dt>
+	<dd>displays the the current central time along the with the day's date</dd>
+	<dt>"Emote commands: happy, sad, creators etc"</dt>
+	<dd>Displays a GIF represeting the word provided by the user </dd>
+	<dt>"filtertoggle"</dt>
+	<dd>enables/unables profanity filter for the server's chat</dd>
+	<dt>"guessthecountry"</dt>
+	<dd>Play a quick game of guess the country flag with the people in the channel</dd>
+	<dt>"RandomImage"</dt>
+	<dd>Displays a random image</dd>
+	<dt>"heart stair [number]"</dt>
+	<dd>Displays a staircase made out of hearts based on the number provided by the user</dd>
+	<dt>"heart square [number]"</dt>
+	<dd>Displays a square made out of hearts based on the number provided by the user</dd>
+	<dt>Hello"</dt>
+	<dd>Welcome the users to the server</dd>
+	
+<dl>
 
 <h3>Commands (created by Dylan)</h3>
 
