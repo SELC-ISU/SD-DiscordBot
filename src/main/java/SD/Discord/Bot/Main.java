@@ -18,6 +18,7 @@ import javax.security.auth.login.LoginException;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
@@ -181,6 +182,7 @@ public class Main {
 		String botToken = "";
 		String music = "";
 		String tos = "";
+		String prof = "";
 		HashMap<String, Object> commandList = new HashMap<String, Object>();
 		List<JPanel> commandEntries = new ArrayList<JPanel>();
 
@@ -201,6 +203,9 @@ public class Main {
 					}
 					else if (key.equalsIgnoreCase("mg-channel")) {
 						tos = (String) map.get(key);
+					}
+					else if (key.equalsIgnoreCase("profanity-filter")) {
+						prof = (String) map.get(key);
 					}
 					else {
 						commandList.put(key, map.get(key));
@@ -236,6 +241,10 @@ public class Main {
 		JPanel tosPanel = ConfigUI.addTOSField(frame, tos);
 		content.add(tosPanel, BorderLayout.SOUTH);
 		
+		//Profanity Filter Toggle
+		JPanel profPanel = ConfigUI.addProfanityFilterButton(frame, prof);
+		content.add(profPanel, BorderLayout.SOUTH);
+		
 		//Custom Commands
 		for (String key : commandList.keySet()) {
 			JPanel newEntry = ConfigUI.customCommandEntry(key, commandList.get(key).toString());
@@ -266,6 +275,14 @@ public class Main {
 					newMap.put("music-channel", newMusic);
 					String newTOS = ConfigUI.getTextFromField(tosPanel);
 					newMap.put("mg-channel", newTOS);
+					JRadioButton profButt = new JRadioButton();
+					for (Component comp : profPanel.getComponents()) {
+						if (comp instanceof JRadioButton) {
+							profButt = (JRadioButton) comp;
+						}
+					}
+					String newProf = profButt.isSelected() + "";
+					newMap.put("profanity-filter", newProf);
 					for (JPanel custom : commandEntries) {
 						String key = null;
 						String value = null;
@@ -294,6 +311,7 @@ public class Main {
 					Variables.setPrefix(newPrefix);
 					Variables.setMusicChannel(newMusic);
 					Variables.setMinigameChannel(newTOS);
+					Variables.setProfanityEnabled(newProf);
 					
 					frame.dispose();
 					

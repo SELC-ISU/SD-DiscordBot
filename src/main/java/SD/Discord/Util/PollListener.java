@@ -1,10 +1,12 @@
 package SD.Discord.Util;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import SD.Discord.Bot.Variables;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Activity.Emoji;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageReaction;
@@ -45,19 +47,25 @@ public class PollListener extends ListenerAdapter{
 						continue;
 					}
 				}
+				EmbedBuilder result = new EmbedBuilder();
 				if (winner.size() > 1) {
-					String finalStr = "Results > It's a tie\n";
+					result.setColor(Color.YELLOW);
+					result.setTitle("Poll Results > It's a tie!");
+					String finalStr = "";
 					for (MessageReaction r : winner) {
-						finalStr += poll.get(e.getAuthor()).getReactDefinition(r.getReactionEmote().getEmoji()) + " (" + r.getReactionEmote().getEmoji() + ") " + " had " + results.get(results.indexOf(r)).getCount() + " votes.";
+						finalStr += poll.get(e.getAuthor()).getReactDefinition(r.getReactionEmote().getEmoji()) + " (" + r.getReactionEmote().getEmoji() + ") " + " had " + results.get(results.indexOf(r)).getCount() + " votes.\n";
 					}
-					e.getChannel().sendMessage(finalStr).queue();
+					result.setDescription(finalStr);
+					e.getChannel().sendMessage(result.build()).queue();
 					poll.remove(e.getAuthor());
 					stage.remove(e.getAuthor());
 					userPoll.remove(e.getAuthor());
 				}
 				else {
-					String msg = "Results > Winner! " + poll.get(e.getAuthor()).getReactDefinition(winner.get(0).getReactionEmote().getEmoji()) + " (" + winner.get(0).getReactionEmote().getEmoji() + ") " + " had " + winner.get(0).getCount() + " votes.";
-					e.getChannel().sendMessage(msg).queue();
+					result.setColor(Color.GREEN);
+					result.setTitle("Poll Results > There's a winner!");
+					result.setDescription(poll.get(e.getAuthor()).getReactDefinition(winner.get(0).getReactionEmote().getEmoji()) + " (" + winner.get(0).getReactionEmote().getEmoji() + ") " + " had " + winner.get(0).getCount() + " votes.");
+					e.getChannel().sendMessage(result.build()).queue();
 					poll.remove(e.getAuthor());
 					stage.remove(e.getAuthor());
 					userPoll.remove(e.getAuthor());
@@ -98,7 +106,6 @@ public class PollListener extends ListenerAdapter{
 							 emoji = false;
 						}
 					}
-					System.out.println(emoji);
 					if (!emoji) {
 						e.getChannel().sendMessage("Error > You must enter an emoji.").queue();
 						return;

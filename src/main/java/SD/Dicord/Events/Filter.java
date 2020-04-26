@@ -1,11 +1,12 @@
 package SD.Dicord.Events;
+import SD.Discord.Bot.Variables;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 public class Filter extends ListenerAdapter {
 	@Override
 	public void onMessageReceived(MessageReceivedEvent filter) {
-		if(FilterOnOff.filterOn) {
+		if(Variables.isProfanityEnabled()) {
 			if ( filter.getAuthor().isBot()) return;
 			String [] BAD_WORDS = {"anal", "ass", "fuck", "motherfucker", "bitch", "balls" ,"cock"};
 			String [] message = filter.getMessage().getContentRaw().split(" ");
@@ -21,9 +22,5 @@ public class Filter extends ListenerAdapter {
 				
 			}
 		}
-		else if(!FilterOnOff.filterOn) {
-			System.out.println("The filter is dissabled");
-		}
-		
 	}
 }

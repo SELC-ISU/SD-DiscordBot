@@ -12,7 +12,7 @@ public class EightBall extends ListenerAdapter{
 		if (e.getAuthor().isBot()) return;
 		if (!e.getMessage().getContentRaw().toLowerCase().startsWith(Variables.getPrefix() + "8ball ")) return;
 		String question = e.getMessage().getContentRaw().substring(Variables.getPrefix().length() + 6).toLowerCase();
-		if (question.startsWith("is") || question.startsWith("am") || question.startsWith("will") || question.startsWith("are")) {
+		if (question.startsWith("is") || question.startsWith("am") || question.startsWith("will") || question.startsWith("are") || question.startsWith("should")) {
 			String[] answers = {
 								"It is certain.",
 								"It is decidedly so.",

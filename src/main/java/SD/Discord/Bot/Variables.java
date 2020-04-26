@@ -12,11 +12,24 @@ public class Variables {
 	private static String prefix;
 	private static String musicChannel;
 	private static String mgChannel;
+	private static boolean profanityEnabled;
 	
 	public Variables() {
 		prefix = "!";
 		musicChannel = "N/A";
 		mgChannel = "N/A";
+	}
+	
+	public static void setProfanityEnabled(String tOrF) {
+		if (tOrF.equalsIgnoreCase("true")) {
+			profanityEnabled = true;
+			return;
+		}
+		profanityEnabled = false;
+	}
+	
+	public static boolean isProfanityEnabled() {
+		return profanityEnabled;
 	}
 	
 	public static String getMusicChannel() {
@@ -92,7 +105,7 @@ public class Variables {
 		}
 		for (String mention : possibleMentions) {
 			List<Role> roleList = guild.getRolesByName(mention, true);
-			List<Member> userList = guild.getMembersByName(mention, true);
+			List<Member> userList = guild.getMembersByEffectiveName(mention, true);
 			if (!roleList.isEmpty()) {
 				Role roleToMention = roleList.get(0);
 				message = message.replace("@" + mention.replace(" ", "_"), roleToMention.getAsMention());
