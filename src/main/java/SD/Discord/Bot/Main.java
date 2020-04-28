@@ -37,6 +37,7 @@ import SD.Dicord.Events.FilterOnOff;
 import SD.Dicord.Events.GuessGame;
 import SD.Dicord.Events.GuildMemberJoin;
 import SD.Dicord.Events.RandomImage;
+import SD.Dicord.Events.Reactions;
 import SD.Discord.Games.RandomGames;
 import SD.Discord.Games.TOSPreGame;
 import SD.Discord.Games.TOSRoles.ResponseListener;
@@ -393,7 +394,8 @@ public class Main {
 							new GuessGame(),
 							new Filter(),
 							new FilterOnOff(),
-							new Clear())
+							new Clear(),
+							new Reactions())
 					.build().awaitReady();
 			return true;
 		} catch (LoginException ex) {
