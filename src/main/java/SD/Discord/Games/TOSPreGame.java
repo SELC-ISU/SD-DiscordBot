@@ -21,6 +21,7 @@ public class TOSPreGame extends ListenerAdapter{
 		//Initialize player
 		String player = "";
 		String playersInGame = "";
+		String accused = "";
 		
 		//Boolean gameActive;
 		
@@ -40,6 +41,8 @@ public class TOSPreGame extends ListenerAdapter{
 		 * prints out message confirming
 		 */
 
+		
+		
 		if ( e.getMessage().getContentRaw().equalsIgnoreCase(Variables.getPrefix() + "join") )
 
 		{
@@ -136,7 +139,7 @@ public class TOSPreGame extends ListenerAdapter{
 		/**
 		 * !clear erases all messages sent while the bot is active
 		 */
-		if (e.getMessage().getContentRaw().equalsIgnoreCase(Variables.getPrefix() + "clear"))
+		/*if (e.getMessage().getContentRaw().equalsIgnoreCase(Variables.getPrefix() + "clear"))
 		{
 			for ( String messageLog : messageIds )
 			{
@@ -147,7 +150,25 @@ public class TOSPreGame extends ListenerAdapter{
 		if ( e.getMessage().getContentRaw().contains(Variables.getPrefix() + "accused"))
 		{
 			player = e.getAuthor().getName();
+		}*/
+		
+		
+		
+		
+		if ( e.getMessage().getContentRaw().equalsIgnoreCase(Variables.getPrefix() + "up") )
+		{
+			accused = e.getAuthor().getName();
+			e.getChannel().sendMessage(accused + "has been put on trial. Type the command prefix and execute or pardon to determine the fate of the person.").queue();
+			
+			if(e.getMessage().getContentRaw().equalsIgnoreCase(Variables.getPrefix() + "execute"))
+			{
+				playerList.remove(0);
+				e.getChannel().sendMessage(player + " has won the game!").queue();
+			}
 		}
+		
+		
+		
 	
 		
 	}

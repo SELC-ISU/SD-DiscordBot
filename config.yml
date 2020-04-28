@@ -1,0 +1,18 @@
+commands02779: 
+- deletethis
+- ping
+- custom
+- anotherexample
+- dm
+- mention
+deletethis: To delete a command just erase the command name.
+prefix: '!'
+music-channel: '*'
+ping: pong
+profanity-filter: false
+custom: What you want the bot to say back goes here
+anotherexample: Create new lines by typing "&n;"!
+dm: '##DM## Start a command response like so for it to be DM''ed to the author.'
+mg-channel: '*'
+token: NjcwMDg0ODQ4NTA1MDYxMzc2.XqdbXw.H9Ec4xqDQniDTxcBjNkkbOtnhgk
+mention: If you are going to mention, use the '_' to represent a space in the name.

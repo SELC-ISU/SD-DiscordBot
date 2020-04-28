@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import net.dv8tion.jda.api.entities.PrivateChannel;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 
@@ -27,9 +28,12 @@ public class RoleController {
 		roleMap = rolesMap;
 		night = false;
 		List<Role> allRolesList = new ArrayList<Role>();
+		allRolesList.add(new Sheriff());
+		allRolesList.add(new Investigator());
 		allRolesList.add(new Godfather());
 		allRolesList.add(new Doctor());
 		allRolesList.add(new SerialKiller());
+		
 		allRoleList = allRolesList;
 		killList = new HashMap<Role, Role>();
 	}
@@ -134,8 +138,12 @@ public class RoleController {
 	public static List<Role> allPossibleRoles() {
 		List<Role> list = new ArrayList<Role>();
 		
-		list.add(new Godfather());
 		list.add(new Doctor());
+		list.add(new Godfather());
+		list.add(new Investigator());
+		list.add(new SerialKiller());
+		list.add(new Sheriff());
+		
 		
 		return list;
 	}
